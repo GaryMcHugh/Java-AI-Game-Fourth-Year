@@ -24,6 +24,7 @@ public class GameRunner implements KeyListener
 		model = new Maze(MAZE_DIMENSION);
 		view = new GameView(model);
 
+		// Initialise sprites 
 		Sprite[] sprites = getSprites();
 		view.setSprites(sprites);
 

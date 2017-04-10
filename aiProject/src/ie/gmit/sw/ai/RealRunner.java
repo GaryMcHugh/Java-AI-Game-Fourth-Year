@@ -12,8 +12,8 @@ public class RealRunner {
 			
 			gr.updateView(); 
 			
-		}
+		}// End while
 
-	}
+	}// End main 
 
-}
+}// End Class RealRunner

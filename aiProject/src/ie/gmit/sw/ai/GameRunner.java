@@ -20,6 +20,7 @@ public class GameRunner implements KeyListener
 	public  boolean isGameOver = false;
 	
 	public GameRunner() throws Exception {
+		
 		model = new Maze(MAZE_DIMENSION);
 		view = new GameView(model);
 

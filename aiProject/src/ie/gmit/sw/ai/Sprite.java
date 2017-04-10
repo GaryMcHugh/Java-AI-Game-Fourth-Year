@@ -4,13 +4,15 @@ import javax.imageio.*;
 import java.awt.image.*;
 
 public class Sprite {
+	
 	private String name; //The name of this sprite
 	private BufferedImage[] frames; //The set of image frames to animate
  	private int index = 0; //Initial starting index in array
  	
 // 	private double lifeForce = 500;
  	
-	public Sprite(String name, String... images) throws Exception{
+	public Sprite(String name, String... images) throws Exception
+	{
 		this.name = name;
 		this.index = 0; //Initialise the starting index to zero
 		this.frames = new BufferedImage[images.length]; //Initialise the image frames

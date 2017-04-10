@@ -6,14 +6,19 @@ import java.util.Random;
 
 import javax.swing.*;
 
-public class GameRunner implements KeyListener {
+import org.omg.CosNaming.IstringHelper;
+
+public class GameRunner implements KeyListener
+{
+	
 	private static final int MAZE_DIMENSION = 100;
 	private static final int IMAGE_COUNT = 14;
 	private GameView view;
 	private Maze model;
 	private int currentRow;
 	private int currentCol;
-
+	public  boolean isGameOver = false;
+	
 	public GameRunner() throws Exception {
 		model = new Maze(MAZE_DIMENSION);
 		view = new GameView(model);
@@ -40,14 +45,15 @@ public class GameRunner implements KeyListener {
 		
 	}
 
-	private void placePlayer() {
+	private void placePlayer() throws InterruptedException {
 		currentRow = (int) (MAZE_DIMENSION * Math.random());
 		currentCol = (int) (MAZE_DIMENSION * Math.random());
 		model.set(currentRow, currentCol, '5'); // A Spartan warrior is at index 5
 		updateView();
 	}
 
-	private void updateView() {
+	public void updateView() throws InterruptedException 
+	{
 
 		Random rand = new Random();
 
@@ -70,14 +76,24 @@ public class GameRunner implements KeyListener {
 		view.setCurrentRow(currentRow);
 		view.setCurrentCol(currentCol);
 		
+		Thread.sleep(1000);
+		
 	}
 
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_Z) {
+	public void keyPressed(KeyEvent e) 
+	{
+		
+		if (e.getKeyCode() == KeyEvent.VK_Z) 
+		{
 			view.toggleZoom();
 		}
 
-		updateView();
+		try {
+			updateView();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -108,7 +124,7 @@ public class GameRunner implements KeyListener {
 		sprites[2] = new Sprite("Help", "resources/help.png");
 		sprites[3] = new Sprite("Bomb", "resources/bomb.png");
 		sprites[4] = new Sprite("Hydrogen Bomb", "resources/h_bomb.png");
-		sprites[5] = new Sprite("Spartan Warrior", "resources/christy.png", "resources/christy.png");
+		sprites[5] = new Sprite("Spartan Warrior", "resources/spartan_1.png", "resources/spartan_2.png");
 		sprites[6] = new Sprite("Black Spider", "resources/black_spider_1.png", "resources/black_spider_2.png");
 		sprites[7] = new Sprite("Blue Spider", "resources/blue_spider_1.png", "resources/blue_spider_2.png");
 		sprites[8] = new Sprite("Brown Spider", "resources/brown_spider_1.png", "resources/brown_spider_2.png");
@@ -120,7 +136,4 @@ public class GameRunner implements KeyListener {
 		return sprites;
 	}
 
-	public static void main(String[] args) throws Exception {
-		new GameRunner();
-	}
 }

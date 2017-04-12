@@ -1,6 +1,8 @@
-package ie.gmit.sw.ai;
+package ie.gmit.sw.ai.runner;
 
-public class RealRunner {
+import ie.gmit.sw.ai.GamePlay;
+
+public class Runner {
 
 	public static void main(String[] args) throws Exception 
 	{
@@ -14,6 +16,6 @@ public class RealRunner {
 			
 		}// End while
 
-	}// End main 
+	}
 
-}// End Class RealRunner
+}

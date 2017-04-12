@@ -8,18 +8,24 @@ import javax.swing.*;
 
 import org.omg.CosNaming.IstringHelper;
 
-public class GameRunner implements KeyListener
+import ie.gmit.sw.ai.maze.Maze;
+import ie.gmit.sw.ai.maze.MazeGenerator;
+
+public class GamePlay implements KeyListener
 {
 	
 	private static final int MAZE_DIMENSION = 100;
 	private static final int IMAGE_COUNT = 14;
 	private GameView view;
-	private Maze model;
+	private MazeGenerator model;
 	private int currentRow;
 	private int currentCol;
-	public  boolean isGameOver = false;
+	private  boolean isGameOver;
 	
-	public GameRunner() throws Exception {
+	public GamePlay() throws Exception {
+		
+		// Set game state
+		isGameOver = false;
 		
 		model = new Maze(MAZE_DIMENSION);
 		view = new GameView(model);
@@ -142,6 +148,14 @@ public class GameRunner implements KeyListener
 		sprites[12] = new Sprite("Red Spider", "resources/red_spider_1.png", "resources/red_spider_2.png");
 		sprites[13] = new Sprite("Yellow Spider", "resources/yellow_spider_1.png", "resources/yellow_spider_2.png");
 		return sprites;
+	}
+
+	public boolean isGameOver() {
+		return isGameOver;
+	}
+
+	public void setGameOver(boolean isGameOver) {
+		this.isGameOver = isGameOver;
 	}
 
 }

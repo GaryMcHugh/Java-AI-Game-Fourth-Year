@@ -3,12 +3,15 @@ package ie.gmit.sw.ai;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import ie.gmit.sw.ai.maze.MazeGenerator;
 public class GameView extends JPanel implements ActionListener{
+	
 	private static final long serialVersionUID = 1L;
 	public static final int DEFAULT_VIEW_SIZE = 800;	
 	private int cellspan = 5;	
 	private int cellpadding = 2;
-	private Maze maze;
+	private MazeGenerator maze;
 	private Sprite[] sprites;
 	private int enemy_state = 5;
 	private Timer timer;
@@ -19,7 +22,7 @@ public class GameView extends JPanel implements ActionListener{
 	private int offset = 48; //The number 0 is ASCII 48.
 	private Color[] reds = {new Color(255,160,122), new Color(139,0,0), new Color(255, 0, 0)}; //Animate enemy "dots" to make them easier to see
 	
-	public GameView(Maze maze) throws Exception{
+	public GameView(MazeGenerator maze) throws Exception{
 		this.maze = maze;
 		setBackground(Color.LIGHT_GRAY);
 		setDoubleBuffered(true);

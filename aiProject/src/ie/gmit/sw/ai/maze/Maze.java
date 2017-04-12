@@ -1,7 +1,7 @@
-package ie.gmit.sw.ai;
+package ie.gmit.sw.ai.maze;
 
 
-public class Maze {
+public class Maze implements MazeGenerator{
 	
 	private char[][] maze;
 	
@@ -32,7 +32,7 @@ public class Maze {
 	
 	
 	// Fill the entire maze with hedges
-	private void init()
+	public void init()
 	{
 		
 		for (int row = 0; row < maze.length; row++)
@@ -45,7 +45,7 @@ public class Maze {
 	}
 	
 	// Add characters and objects to game by replacing them over the hedge
-	private void addFeature(char feature, char replace, int number)
+	public void addFeature(char feature, char replace, int number)
 	{
 		int counter = 0;
 		
@@ -64,7 +64,7 @@ public class Maze {
 	
 	// buildMaze is used to add blank spaces in which you can move around in
 	// It however makes sure that borders of the maze are kept intact
-	private void buildMaze(){ 
+	public void buildMaze(){ 
 		
 		// Keep borders
 		for (int row = 1; row < maze.length - 1; row++){
@@ -104,7 +104,7 @@ public class Maze {
 		return this.maze.length;
 	}
 	
-	public String toString(){
+	/*public String toString(){
 		StringBuffer sb = new StringBuffer();
 		for (int row = 0; row < maze.length; row++){
 			for (int col = 0; col < maze[row].length; col++){
@@ -114,5 +114,6 @@ public class Maze {
 			sb.append("\n");
 		}
 		return sb.toString();
-	}
+	}*/
+
 }// End class maze

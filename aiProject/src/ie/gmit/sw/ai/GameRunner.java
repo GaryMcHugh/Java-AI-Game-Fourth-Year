@@ -24,7 +24,7 @@ public class GameRunner implements KeyListener
 		model = new Maze(MAZE_DIMENSION);
 		view = new GameView(model);
 
-		// Initialise sprites 
+		// Initialize sprites 
 		Sprite[] sprites = getSprites();
 		view.setSprites(sprites);
 
@@ -103,10 +103,16 @@ public class GameRunner implements KeyListener
 
 	public void keyTyped(KeyEvent e) {
 	} // Ignore
-
-	private boolean isValidMove(int row, int col) {
-		if (row <= model.size() - 1 && col <= model.size() - 1 && model.get(row, col) == ' ') {
+	
+	// 
+	private boolean isValidMove(int row, int col) 
+	{
+		// If the block is a blank space then the spartan can move
+		if (row <= model.size() - 1 && col <= model.size() - 1 && model.get(row, col) == ' ') 
+		{
 			model.set(currentRow, currentCol, '\u0020');
+			
+			// The number 5 is the spartan
 			model.set(row, col, '5');
 			return true;
 		} else {

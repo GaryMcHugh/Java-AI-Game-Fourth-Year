@@ -2,8 +2,11 @@ package ie.gmit.sw.ai;
 
 
 public class Maze {
+	
 	private char[][] maze;
+	
 	public Maze(int dimension){
+		
 		maze = new char[dimension][dimension];
 		init();
 		buildMaze();
@@ -27,34 +30,58 @@ public class Maze {
 		addFeature('\u003D', '0', featureNumber); //= is a Yellow Spider, 0 is a hedge
 	}
 	
-	private void init(){
-		for (int row = 0; row < maze.length; row++){
-			for (int col = 0; col < maze[row].length; col++){
+	
+	// Fill the entire maze with hedges
+	private void init()
+	{
+		
+		for (int row = 0; row < maze.length; row++)
+		{
+			for (int col = 0; col < maze[row].length; col++)
+			{
 				maze[row][col] = '0'; //Index 0 is a hedge...
 			}
 		}
 	}
 	
-	private void addFeature(char feature, char replace, int number){
+	// Add characters and objects to game by replacing them over the hedge
+	private void addFeature(char feature, char replace, int number)
+	{
 		int counter = 0;
-		while (counter < feature){
+		
+		while (counter < feature)
+		{
 			int row = (int) (maze.length * Math.random());
 			int col = (int) (maze[0].length * Math.random());
 			
-			if (maze[row][col] == replace){
+			if (maze[row][col] == replace)
+			{
 				maze[row][col] = feature;
 				counter++;
 			}
 		}
 	}
 	
+	// buildMaze is used to add blank spaces in which you can move around in
+	// It however makes sure that borders of the maze are kept intact
 	private void buildMaze(){ 
+		
+		// Keep borders
 		for (int row = 1; row < maze.length - 1; row++){
+			
+			// Keep borders
 			for (int col = 1; col < maze[row].length - 1; col++){
+				
+				// Generate random number
 				int num = (int) (Math.random() * 10);
-				if (num > 5 && col + 1 < maze[row].length - 1){
+				
+				// Add blank space to move around
+				if (num > 5 && col + 1 < maze[row].length - 1)
+				{
 					maze[row][col + 1] = '\u0020'; //\u0020 = 0x20 = 32 (base 10) = SPACE
-				}else{
+				}else
+				{
+					// Add blank space to move around
 					if (row + 1 < maze.length - 1)maze[row + 1][col] = '\u0020';
 				}
 			}
@@ -88,4 +115,4 @@ public class Maze {
 		}
 		return sb.toString();
 	}
-}
+}// End class maze

@@ -11,6 +11,7 @@ public class Maze implements MazeGenerator{
 		init();
 		buildMaze();
 		
+		// First value represents the position in the array
 		int featureNumber = (int)((dimension * dimension) * 0.01);
 		addFeature('\u0031', '0', featureNumber); //1 is a sword, 0 is a hedge
 		addFeature('\u0032', '0', featureNumber); //2 is help, 0 is a hedge

@@ -1,6 +1,6 @@
 package ie.gmit.sw.ai;
 
-
+// Creating an object of Maze will build a maze of a specified size
 public class Maze implements Mazeable {
 	
 	private char[][] maze;
@@ -8,33 +8,44 @@ public class Maze implements Mazeable {
 	public Maze(int dimension)
 	{
 		
+		// Initialize size of array
 		maze = new char[dimension][dimension];
+		
+		// Created the square for the maze and fills it with hedges sprites
 		init();
+		
+		// Adds blank spaces to the array
 		buildMaze();
 		
-		int featureNumber = (int)((dimension * dimension) * 0.01);
-		addFeature('\u0031', '0', featureNumber); //1 is a sword, 0 is a hedge
-		addFeature('\u0032', '0', featureNumber); //2 is help, 0 is a hedge
-		addFeature('\u0033', '0', featureNumber); //3 is a bomb, 0 is a hedge
-		addFeature('\u0034', '0', featureNumber); //4 is a hydrogen bomb, 0 is a hedge
 		
-		//==============================================
-		//remove an add feature line to remove that type of block/spider
-		featureNumber = (int)((dimension * dimension) * 0.01);
-		addFeature('\u0036', '0', featureNumber); //6 is a Black Spider, 0 is a hedge
-		addFeature('\u0037', '0', featureNumber); //7 is a Blue Spider, 0 is a hedge
-		addFeature('\u0038', '0', featureNumber); //8 is a Brown Spider, 0 is a hedge
-		addFeature('\u0039', '0', featureNumber); //9 is a Green Spider, 0 is a hedge
-		addFeature('\u003A', '0', featureNumber); //: is a Grey Spider, 0 is a hedge
-		addFeature('\u003B', '0', featureNumber); //; is a Orange Spider, 0 is a hedge
-		addFeature('\u003C', '0', featureNumber); //< is a Red Spider, 0 is a hedge
-		addFeature('\u003D', '0', featureNumber); //= is a Yellow Spider, 0 is a hedge
+		//  ==================  Adding features to maze  ==================
+		// 		Randomly places the other items and characters to the game
+		// 			These are put in place of the hedges sprites
+		//  ===============================================================
+		
+		// featureNumber is never used
+		//int featureNumber = (int)((dimension * dimension) * 0.01);
+		
+		
+		addFeature('\u0031', '0', 100); //1 is a sword, 0 is a hedge
+		addFeature('\u0032', '0', 100); //2 is help, 0 is a hedge
+		addFeature('\u0033', '0', 100); //3 is a bomb, 0 is a hedge
+		addFeature('\u0034', '0', 100); //4 is a hydrogen bomb, 0 is a hedge
+		
+		// featureNumber is never used
+		//featureNumber = (int)((dimension * dimension) * 0.01);
+		
+		addFeature('\u0036', '0', 100); //6 is a Black Spider, 0 is a hedge
+		addFeature('\u0037', '0', 100); //7 is a Blue Spider, 0 is a hedge
+		addFeature('\u0038', '0', 100); //8 is a Brown Spider, 0 is a hedge
+		addFeature('\u0039', '0', 100); //9 is a Green Spider, 0 is a hedge
+		addFeature('\u003A', '0', 100); //: is a Grey Spider, 0 is a hedge
+		addFeature('\u003B', '0', 100); //; is a Orange Spider, 0 is a hedge
+		addFeature('\u003C', '0', 100); //< is a Red Spider, 0 is a hedge
+		addFeature('\u003D', '0', 100); //= is a Yellow Spider, 0 is a hedge
 	}
 	
-	/* (non-Javadoc)
-	 * @see ie.gmit.sw.ai.Mazeable#init()
-	 */
-	@Override
+	// Fill the entire maze with hedges
 	public void init() {
 		for (int row = 0; row < maze.length; row++){
 			for (int col = 0; col < maze[row].length; col++){
@@ -43,10 +54,8 @@ public class Maze implements Mazeable {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see ie.gmit.sw.ai.Mazeable#addFeature(char, char, int)
-	 */
-	@Override
+	// Add characters and objects to game by replacing them over the hedge
+	// 'number is never used'
 	public void addFeature(char feature, char replace, int number) {
 		int counter = 0;
 		while (counter < feature){
@@ -60,10 +69,8 @@ public class Maze implements Mazeable {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see ie.gmit.sw.ai.Mazeable#buildMaze()
-	 */
-	@Override
+	// buildMaze is used to add blank spaces in which you can move around in
+	// It however makes sure that borders of the maze are kept intact
 	public void buildMaze() { 
 		for (int row = 1; row < maze.length - 1; row++){
 			for (int col = 1; col < maze[row].length - 1; col++){
@@ -77,43 +84,16 @@ public class Maze implements Mazeable {
 		}		
 	}
 
-	/* (non-Javadoc)
-	 * @see ie.gmit.sw.ai.Mazeable#get(int, int)
-	 */
-	@Override
 	public char get(int row, int col) {
 		return this.maze[row][col];
 	}
 
-	/* (non-Javadoc)
-	 * @see ie.gmit.sw.ai.Mazeable#set(int, int, char)
-	 */
-	@Override
 	public void set(int row, int col, char c) {
 		this.maze[row][col] = c;
 	}
 
-	/* (non-Javadoc)
-	 * @see ie.gmit.sw.ai.Mazeable#size()
-	 */
-	@Override
 	public int size() {
 		return this.maze.length;
 	}
 	
-	/*public char[][] getMaze(){
-		return this.maze;
-	}*/
-	
-	/*public String toString(){
-		StringBuffer sb = new StringBuffer();
-		for (int row = 0; row < maze.length; row++){
-			for (int col = 0; col < maze[row].length; col++){
-				sb.append(maze[row][col]);
-				if (col < maze[row].length - 1) sb.append(",");
-			}
-			sb.append("\n");
-		}
-		return sb.toString();
-	}*/
-}
+}// End class Maze

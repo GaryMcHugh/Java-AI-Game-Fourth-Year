@@ -80,15 +80,21 @@ public class GameRunner implements KeyListener
 		
 	}
 
-	private void placePlayer() throws InterruptedException {
+	private void placePlayer() throws InterruptedException 
+	{
+		
+		// Random starting position
 		currentRow = (int) (MAZE_DIMENSION * Math.random());
 		currentCol = (int) (MAZE_DIMENSION * Math.random());
-		maze.set(currentRow, currentCol, '5'); // A Spartan warrior is at index 5
+		
+		// A Spartan warrior is at index 5
+		maze.set(currentRow, currentCol, '5'); 
 		updateView();
 	
 		Thread.sleep(1000);
 	}
 
+	// This is the place where the characters will be controlled and moved around the maze
 	public void updateView() throws InterruptedException 
 	{
 
@@ -113,6 +119,10 @@ public class GameRunner implements KeyListener
 		view.setCurrentRow(currentRow);
 		view.setCurrentCol(currentCol);
 		
+		// Pass in maze and players starting position
+		// maze[][] and maze.set();
+		// maze.set is an element of the char array
+		
 		Thread.sleep(1000);
 		
 	}
@@ -133,11 +143,6 @@ public class GameRunner implements KeyListener
 		}
 	}
 
-	public void keyReleased(KeyEvent e) {
-	} // Ignore
-
-	public void keyTyped(KeyEvent e) {
-	} // Ignore
 
 	private boolean isValidMove(int row, int col) {
 		if (row <= maze.size() - 1 && col <= maze.size() - 1 && maze.get(row, col) == ' ') {
@@ -149,11 +154,11 @@ public class GameRunner implements KeyListener
 		}
 	}
 
-	private Sprite[] getSprites() throws Exception {
-		// Read in the images from the resources directory as sprites. Note that
-		// each
-		// sprite will be referenced by its index in the array, e.g. a 3 implies
-		// a Bomb...
+	private Sprite[] getSprites() throws Exception 
+	{
+		
+		// Read in the images from the resources directory as sprites. Note that each
+		// sprite will be referenced by its index in the array, e.g. a 3 implies a Bomb...
 		// Ideally, the array should dynamically created from the images...
 		Sprite[] sprites = new Sprite[IMAGE_COUNT];
 		sprites[0] = new Sprite("Hedge", "resources/hedge.png");
@@ -180,5 +185,9 @@ public class GameRunner implements KeyListener
 	public void setGameOver(boolean isGameOver) {
 		this.isGameOver = isGameOver;
 	}
+	
+	// =========  Ignore ========= 
+	public void keyReleased(KeyEvent e) {} 
+	public void keyTyped(KeyEvent e) {} 
 
-}
+}// End class GameRunner

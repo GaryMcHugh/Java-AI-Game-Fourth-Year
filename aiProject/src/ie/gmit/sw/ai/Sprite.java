@@ -3,20 +3,33 @@ package ie.gmit.sw.ai;
 import javax.imageio.*;
 import java.awt.image.*;
 
-public class Sprite {
-	private String name; //The name of this sprite
-	private BufferedImage[] frames; //The set of image frames to animate
- 	private int index = 0; //Initial starting index in array
+public class Sprite 
+{
+	//The name of this sprite
+	private String name; 
+	
+	//The set of image frames to animate
+	private BufferedImage[] frames; 
+	
+	//Initial starting index in array
+ 	private int index = 0; 
  	
 // 	private double lifeForce = 500;
  	
-	public Sprite(String name, String... images) throws Exception{
+	public Sprite(String name, String... images) throws Exception
+	{
 		this.name = name;
-		this.index = 0; //Initialise the starting index to zero
-		this.frames = new BufferedImage[images.length]; //Initialise the image frames
 		
-		for (int i = 0; i < images.length; i++){
-			frames[i] = ImageIO.read(new java.io.File(images[i])); //Read in each image as a BufferedImage
+		//Initialize the starting index to zero
+		this.index = 0; 
+		
+		//Initialize the image frames
+		this.frames = new BufferedImage[images.length]; 
+		
+		//Read in each image as a BufferedImage
+		for (int i = 0; i < images.length; i++)
+		{
+			frames[i] = ImageIO.read(new java.io.File(images[i])); 
 		}
 	}
 	
@@ -35,7 +48,10 @@ public class Sprite {
 //		return lifeForce > 0;
 //	}
 	
-	public BufferedImage getNext(){ //Returns the next image frame
+	// Used in GameView's paintComponent method
+	// Returns the next image frame
+	public BufferedImage getNext()
+	{ 
 		//move them here
 		int idx = index;
 		if (index < frames.length - 1){
@@ -46,7 +62,8 @@ public class Sprite {
 		return frames[idx]; 
 	}
 	
-	public String getName(){
+	public String getName()
+	{
 		return this.name;
 	}
-}
+}// End class Sprite

@@ -11,46 +11,82 @@ import org.omg.CosNaming.IstringHelper;
 public class GameRunner implements KeyListener
 {
 	
+	// Initialize size of maze / Number of rows and columns
 	private static final int MAZE_DIMENSION = 100;
+	
+	// Initialize size of Sprite array
 	private static final int IMAGE_COUNT = 14;
+	
 	private GameView view;
-	private Maze model;
+	private Mazeable maze;
+	
+	// Keep track of current position in the maze / array
 	private int currentRow;
 	private int currentCol;
+	
+	// Set game state
 	public  boolean isGameOver = false;
 	
 	public GameRunner() throws Exception {
 		
-		model = new Maze(MAZE_DIMENSION);
-		view = new GameView(model);
+		// Create maze of the size initialized in Maze_Dimension
+		maze = new Maze(MAZE_DIMENSION);
+		
+		// Pass in copy of maze to the game view
+		view = new GameView(maze);
 
+		// Store the sprite which have been loaded in from resources folder
 		Sprite[] sprites = getSprites();
+		
+		// Set the sprites in the game view
 		view.setSprites(sprites);
 
+		// Position player in the maze
 		placePlayer();
 
+		// Set the physical size of the game screen. Not to do with the number of rows and columns
 		Dimension d = new Dimension(GameView.DEFAULT_VIEW_SIZE, GameView.DEFAULT_VIEW_SIZE);
+		
+		// Methods are tied to the JPanel component
 		view.setPreferredSize(d);
 		view.setMinimumSize(d);
 		view.setMaximumSize(d);
 
+		//  =========================  Code for setting up the Window  =========================
+		
+		// Draws the game view frame
 		JFrame f = new JFrame("GMIT - B.Sc. in Computing (Software Development)");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.addKeyListener(this);
+		
+		// Set the layout type
 		f.getContentPane().setLayout(new FlowLayout());
+		
+		// Attach the game view to the JFrame
 		f.add(view);
-		f.setSize(1000, 1000);
-		f.setLocation(100, 100);
-		f.pack();
+		
+		// Doesn't have any affect on the size. This is due to the method pack() doing the required work
+		//f.setSize(800, 800); 
+		
+		 // Set the position the window will open at. Should be near center of screen
+		f.setLocation(500, 100);
+		
+		// Fits the frame to the game view size
+		f.pack(); 
+		
 		f.setVisible(true);
+		
+		//  ====================================================================================
 		
 	}
 
 	private void placePlayer() throws InterruptedException {
 		currentRow = (int) (MAZE_DIMENSION * Math.random());
 		currentCol = (int) (MAZE_DIMENSION * Math.random());
-		model.set(currentRow, currentCol, '5'); // A Spartan warrior is at index 5
+		maze.set(currentRow, currentCol, '5'); // A Spartan warrior is at index 5
 		updateView();
+	
+		Thread.sleep(1000);
 	}
 
 	public void updateView() throws InterruptedException 
@@ -104,9 +140,9 @@ public class GameRunner implements KeyListener
 	} // Ignore
 
 	private boolean isValidMove(int row, int col) {
-		if (row <= model.size() - 1 && col <= model.size() - 1 && model.get(row, col) == ' ') {
-			model.set(currentRow, currentCol, '\u0020');
-			model.set(row, col, '5');
+		if (row <= maze.size() - 1 && col <= maze.size() - 1 && maze.get(row, col) == ' ') {
+			maze.set(currentRow, currentCol, '\u0020');
+			maze.set(row, col, '5');
 			return true;
 		} else {
 			return false; // Can't move
@@ -135,6 +171,14 @@ public class GameRunner implements KeyListener
 		sprites[12] = new Sprite("Red Spider", "resources/red_spider_1.png", "resources/red_spider_2.png");
 		sprites[13] = new Sprite("Yellow Spider", "resources/yellow_spider_1.png", "resources/yellow_spider_2.png");
 		return sprites;
+	}
+
+	public boolean isGameOver() {
+		return isGameOver;
+	}
+
+	public void setGameOver(boolean isGameOver) {
+		this.isGameOver = isGameOver;
 	}
 
 }

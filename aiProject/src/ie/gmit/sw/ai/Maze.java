@@ -1,9 +1,13 @@
 package ie.gmit.sw.ai;
 
 
-public class Maze {
+public class Maze implements Mazeable {
+	
 	private char[][] maze;
-	public Maze(int dimension){
+	
+	public Maze(int dimension)
+	{
+		
 		maze = new char[dimension][dimension];
 		init();
 		buildMaze();
@@ -27,15 +31,23 @@ public class Maze {
 		addFeature('\u003D', '0', featureNumber); //= is a Yellow Spider, 0 is a hedge
 	}
 	
-	private void init(){
+	/* (non-Javadoc)
+	 * @see ie.gmit.sw.ai.Mazeable#init()
+	 */
+	@Override
+	public void init() {
 		for (int row = 0; row < maze.length; row++){
 			for (int col = 0; col < maze[row].length; col++){
 				maze[row][col] = '0'; //Index 0 is a hedge...
 			}
 		}
 	}
-	
-	private void addFeature(char feature, char replace, int number){
+
+	/* (non-Javadoc)
+	 * @see ie.gmit.sw.ai.Mazeable#addFeature(char, char, int)
+	 */
+	@Override
+	public void addFeature(char feature, char replace, int number) {
 		int counter = 0;
 		while (counter < feature){
 			int row = (int) (maze.length * Math.random());
@@ -47,8 +59,12 @@ public class Maze {
 			}
 		}
 	}
-	
-	private void buildMaze(){ 
+
+	/* (non-Javadoc)
+	 * @see ie.gmit.sw.ai.Mazeable#buildMaze()
+	 */
+	@Override
+	public void buildMaze() { 
 		for (int row = 1; row < maze.length - 1; row++){
 			for (int col = 1; col < maze[row].length - 1; col++){
 				int num = (int) (Math.random() * 10);
@@ -60,24 +76,36 @@ public class Maze {
 			}
 		}		
 	}
-	
-	public char[][] getMaze(){
-		return this.maze;
-	}
-	
-	public char get(int row, int col){
+
+	/* (non-Javadoc)
+	 * @see ie.gmit.sw.ai.Mazeable#get(int, int)
+	 */
+	@Override
+	public char get(int row, int col) {
 		return this.maze[row][col];
 	}
-	
-	public void set(int row, int col, char c){
+
+	/* (non-Javadoc)
+	 * @see ie.gmit.sw.ai.Mazeable#set(int, int, char)
+	 */
+	@Override
+	public void set(int row, int col, char c) {
 		this.maze[row][col] = c;
 	}
-	
-	public int size(){
+
+	/* (non-Javadoc)
+	 * @see ie.gmit.sw.ai.Mazeable#size()
+	 */
+	@Override
+	public int size() {
 		return this.maze.length;
 	}
 	
-	public String toString(){
+	/*public char[][] getMaze(){
+		return this.maze;
+	}*/
+	
+	/*public String toString(){
 		StringBuffer sb = new StringBuffer();
 		for (int row = 0; row < maze.length; row++){
 			for (int col = 0; col < maze[row].length; col++){
@@ -87,5 +115,5 @@ public class Maze {
 			sb.append("\n");
 		}
 		return sb.toString();
-	}
+	}*/
 }

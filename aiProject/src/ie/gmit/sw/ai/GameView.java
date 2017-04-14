@@ -3,28 +3,40 @@ package ie.gmit.sw.ai;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class GameView extends JPanel implements ActionListener{
+
+// Class is responsible for showing the sprites within the JFrame
+// It extends JPanel which is placed into the JFrame in the class GameRunner
+public class GameView extends JPanel implements ActionListener
+{
+	
 	private static final long serialVersionUID = 1L;
+	
+	// Size of the game view, works best at 800
 	public static final int DEFAULT_VIEW_SIZE = 800;	
 	private int cellspan = 5;	
 	private int cellpadding = 2;
-	private Maze maze;
+	private Mazeable maze;
 	private Sprite[] sprites;
 	private int enemy_state = 5;
 	private Timer timer;
 	private int currentRow;
 	private int currentCol;
+	private int offset = 48; //The number 0 is ASCII 48.
+	
+	// Used for zoomed out view
 	private boolean zoomOut = false;
 	private int imageIndex = -1;
-	private int offset = 48; //The number 0 is ASCII 48.
 	private Color[] reds = {new Color(255,160,122), new Color(139,0,0), new Color(255, 0, 0)}; //Animate enemy "dots" to make them easier to see
 	
-	public GameView(Maze maze) throws Exception{
+	public GameView(Mazeable maze) throws Exception{
 		this.maze = maze;
-		setBackground(Color.LIGHT_GRAY);
+		
+		// Changes the background tile of the sprite 
+		setBackground(Color.PINK);
 		setDoubleBuffered(true);
 		timer = new Timer(300, this);
 		timer.start();
+		
 	}
 	
 	public void setCurrentRow(int row) {
@@ -36,7 +48,7 @@ public class GameView extends JPanel implements ActionListener{
 			currentRow = row;
 		}
 	}
-
+	
 	public void setCurrentCol(int col) {
 		if (col < cellpadding){
 			currentCol = cellpadding;
@@ -46,7 +58,8 @@ public class GameView extends JPanel implements ActionListener{
 			currentCol = col;
 		}
 	}
-
+	
+	// Draw screen in zoomed out mode
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
@@ -91,7 +104,7 @@ public class GameView extends JPanel implements ActionListener{
 	public void toggleZoom(){
 		zoomOut = !zoomOut;		
 	}
-
+	
 	public void actionPerformed(ActionEvent e) {	
 		if (enemy_state < 0 || enemy_state == 5){
 			enemy_state = 6;
@@ -101,7 +114,9 @@ public class GameView extends JPanel implements ActionListener{
 		this.repaint();
 	}
 	
+	// Setter for sprites variable
 	public void setSprites(Sprite[] sprites){
 		this.sprites = sprites;
 	}
+
 }

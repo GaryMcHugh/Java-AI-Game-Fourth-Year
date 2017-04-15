@@ -84,9 +84,6 @@ public class GameView extends JPanel implements ActionListener
         		int y1 = row * size;
         		
         		char ch = '0';
-        		
-        		// *********  CODE HERE NEEDS TO BE FIXED  *********
-        		//Node ch = null;
        		
         		if (zoomOut)
         		{

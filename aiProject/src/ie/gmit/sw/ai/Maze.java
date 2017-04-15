@@ -15,7 +15,7 @@ public class Maze implements Mazeable {
 		init();
 		
 		// Adds blank spaces to the array
-		buildMaze();
+		//buildMaze();
 		
 		
 		//  ==================  Adding features to maze  ==================
@@ -43,6 +43,9 @@ public class Maze implements Mazeable {
 		addFeature('\u003B', '0', 100); //; is a Orange Spider, 0 is a hedge
 		addFeature('\u003C', '0', 100); //< is a Red Spider, 0 is a hedge
 		addFeature('\u003D', '0', 100); //= is a Yellow Spider, 0 is a hedge
+		
+		// Adds blank spaces to the array
+		buildMaze();
 	}
 	
 	// Fill the entire maze with hedges
@@ -50,7 +53,11 @@ public class Maze implements Mazeable {
 		for (int row = 0; row < maze.length; row++){
 			for (int col = 0; col < maze[row].length; col++){
 				maze[row][col] = '0'; //Index 0 is a hedge...
+				//System.out.print(maze[row][col]);
 			}
+			
+			//System.out.println();
+				
 		}
 	}
 
@@ -66,21 +73,28 @@ public class Maze implements Mazeable {
 				maze[row][col] = feature;
 				counter++;
 			}
+			
 		}
 	}
 
 	// buildMaze is used to add blank spaces in which you can move around in
 	// It however makes sure that borders of the maze are kept intact
+	// Does not print out the borders 
 	public void buildMaze() { 
 		for (int row = 1; row < maze.length - 1; row++){
-			for (int col = 1; col < maze[row].length - 1; col++){
+			for (int col = 1; col < maze[row].length - 1; col++)
+			{
 				int num = (int) (Math.random() * 10);
 				if (num > 5 && col + 1 < maze[row].length - 1){
 					maze[row][col + 1] = '\u0020'; //\u0020 = 0x20 = 32 (base 10) = SPACE
+					System.out.print(maze[row][col]);
 				}else{
 					if (row + 1 < maze.length - 1)maze[row + 1][col] = '\u0020';
+					System.out.print(maze[row][col]);
 				}
 			}
+			
+			System.out.println();
 		}		
 	}
 

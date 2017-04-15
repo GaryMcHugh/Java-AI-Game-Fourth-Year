@@ -8,6 +8,10 @@ import javax.swing.*;
 
 import org.omg.CosNaming.IstringHelper;
 
+import ie.gmit.sw.ai.traversers.BruteForceTraversator;
+import ie.gmit.sw.ai.traversers.Node;
+import ie.gmit.sw.ai.traversers.Traversator;
+
 public class GameRunner implements KeyListener
 {
 	
@@ -19,6 +23,7 @@ public class GameRunner implements KeyListener
 	
 	private GameView view;
 	private Mazeable maze;
+	private Node node;
 	
 	// Keep track of current position in the maze / array
 	private int currentRow;
@@ -42,7 +47,11 @@ public class GameRunner implements KeyListener
 		view.setSprites(sprites);
 
 		// Position player in the maze
+		// Initialize node to starting position
 		placePlayer();
+		
+		/*Traversator t = new BruteForceTraversator(true);
+		t.traverse(maze, node);*/
 
 		// Set the physical size of the game screen. Not to do with the number of rows and columns
 		Dimension d = new Dimension(GameView.DEFAULT_VIEW_SIZE, GameView.DEFAULT_VIEW_SIZE);
@@ -89,6 +98,9 @@ public class GameRunner implements KeyListener
 		
 		// A Spartan warrior is at index 5
 		maze.set(currentRow, currentCol, '5'); 
+		
+		// Initialize node to Spartans starting position
+		//node = new Node(currentRow, currentCol);
 		updateView();
 	
 		Thread.sleep(1000);
@@ -122,6 +134,7 @@ public class GameRunner implements KeyListener
 		// Pass in maze and players starting position
 		// maze[][] and maze.set();
 		// maze.set is an element of the char array
+		
 		
 		Thread.sleep(1000);
 		

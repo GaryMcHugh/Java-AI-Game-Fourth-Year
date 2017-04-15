@@ -154,8 +154,6 @@ public class Maze
 	private void printFullMaze()
 	{
 		
-		System.out.println("\n\n");
-		
 		// Loop through the whole array
 		for (int row = 0; row < maze.length; row++)
 		{
@@ -181,6 +179,11 @@ public class Maze
 		return this.maze[row][col].getElement();
 		
 	}// End method get
+	
+	public void set(int row, int col, char c) 
+	{
+		this.maze[row][col].setElement(c);;
+	}
 	
 	// Returns the size of the maze
 	public int size()

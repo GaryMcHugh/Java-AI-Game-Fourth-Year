@@ -9,8 +9,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import ie.gmit.sw.ai.maze.*;
-import ie.gmit.sw.ai.Sprite;
 
 /*
  * 
@@ -98,17 +96,24 @@ public class GameView extends JPanel implements ActionListener
 	        			}
         				g2.fillRect(x1, y1, size, size);
         			}
-        		}else{
+        		}
+        		else
+        		{
         			ch = maze.get(currentRow - cellpadding + row, currentCol - cellpadding + col);
         		}
         		
         		imageIndex = (int) ch;
         		imageIndex -= offset;
-        		if (imageIndex < 0){
+        		if (imageIndex < 0)
+        		{
+        			
         			g2.setColor(Color.LIGHT_GRAY);//Empty cell
-        			g2.fillRect(x1, y1, size, size);   			
-        		}else{
-        			//g2.drawImage(sprites[imageIndex].getNext(), x1, y1, null);
+        			g2.fillRect(x1, y1, size, size);  
+        			
+        		}
+        		else
+        		{
+        			g2.drawImage(sprites[imageIndex].getNext(), x1, y1, null);
         		}
         	}
         }

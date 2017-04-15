@@ -22,8 +22,9 @@ public class GameRunner implements KeyListener
 	private static final int IMAGE_COUNT = 14;
 	
 	private GameView view;
-	private Mazeable maze;
+	private Maze maze;
 	private Node node;
+	private Node[][] nodeMaze;
 	
 	// Keep track of current position in the maze / array
 	private int currentRow;
@@ -50,8 +51,8 @@ public class GameRunner implements KeyListener
 		// Initialize node to starting position
 		placePlayer();
 		
-		/*Traversator t = new BruteForceTraversator(true);
-		t.traverse(maze, node);*/
+		Traversator t = new BruteForceTraversator(true);
+		t.traverse(maze, node);
 
 		// Set the physical size of the game screen. Not to do with the number of rows and columns
 		Dimension d = new Dimension(GameView.DEFAULT_VIEW_SIZE, GameView.DEFAULT_VIEW_SIZE);
@@ -98,6 +99,9 @@ public class GameRunner implements KeyListener
 		
 		// A Spartan warrior is at index 5
 		maze.set(currentRow, currentCol, '5'); 
+		
+		// Node is initialized with Spartans position
+		node = new Node(currentRow, currentCol);
 		
 		// Initialize node to Spartans starting position
 		//node = new Node(currentRow, currentCol);

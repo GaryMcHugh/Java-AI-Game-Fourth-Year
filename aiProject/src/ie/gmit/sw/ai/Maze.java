@@ -1,22 +1,24 @@
 package ie.gmit.sw.ai;
 
+import ie.gmit.sw.ai.traversers.Node;
+
 // Creating an object of Maze will build a maze of a specified size
-public class Maze implements Mazeable {
+public class Maze{
 	
-	private char[][] maze;
+	private Node[][] maze;
+	private Node node;
 	
 	public Maze(int dimension)
 	{
 		
 		// Initialize size of array
-		maze = new char[dimension][dimension];
+		maze = new Node[dimension][dimension];
 		
 		// Created the square for the maze and fills it with hedges sprites
 		init();
 		
 		// Adds blank spaces to the array
 		//buildMaze();
-		
 		
 		//  ==================  Adding features to maze  ==================
 		// 		Randomly places the other items and characters to the game
@@ -51,9 +53,12 @@ public class Maze implements Mazeable {
 	// Fill the entire maze with hedges
 	public void init() {
 		for (int row = 0; row < maze.length; row++){
-			for (int col = 0; col < maze[row].length; col++){
-				maze[row][col] = '0'; //Index 0 is a hedge...
+			for (int col = 0; col < maze[row].length; col++)
+			{
+				
+				maze[row][col] = node.setSprite('0');		//'0'; //Index 0 is a hedge...
 				//System.out.print(maze[row][col]);
+				
 			}
 			
 			//System.out.println();

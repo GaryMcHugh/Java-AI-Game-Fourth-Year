@@ -4,5 +4,5 @@ import ie.gmit.sw.ai.Mazeable;
 
 public interface Traversator 
 {
-	public void traverse(Mazeable maze, Node start);
+	public void traverse(Node[][] maze, Node start);
 }

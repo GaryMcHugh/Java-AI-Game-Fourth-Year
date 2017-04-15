@@ -5,9 +5,16 @@ import java.awt.Color;
 import ie.gmit.sw.ai.Mazeable;
 public class Node {
 	
-	/*public enum Direction {North, South, East, West};
+	public enum Direction {North, South, East, West};
 	private Node parent;
+	
+	// Background of the maze
 	private Color color = Color.BLACK;
+	
+	// Put in char here and initialize it
+	private char sprite;
+	
+	
 	private Direction[] paths = null;
 	public boolean visited =  false;
 	public boolean goal;
@@ -52,7 +59,7 @@ public class Node {
 		return false;
 	}
 	
-	public Node[] children(Mazeable[][] maze){
+	public Node[] children(Node[][] maze){
 		
 		java.util.List<Node> children = new java.util.ArrayList<Node>();
 				
@@ -129,5 +136,13 @@ public class Node {
 
 	public String toString() {
 		return "[" + row + "/" + col + "]";
-	}*/
+	}
+
+	public char getSprite() {
+		return sprite;
+	}
+
+	public Node setSprite(char sprite) {
+		return this.sprite = sprite;
+	}
 }

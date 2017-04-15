@@ -4,10 +4,10 @@ import java.util.*;
 
 import ie.gmit.sw.ai.Mazeable;
 
-public class BruteForceTraversator //implements Traversator
+public class BruteForceTraversator implements Traversator
 {
 	
-	/*private boolean dfs = false;
+	private boolean dfs = false;
 	
 	public BruteForceTraversator(boolean depthFirst){
 		this.dfs = depthFirst;
@@ -15,7 +15,7 @@ public class BruteForceTraversator //implements Traversator
 	
 	// node in this case is the starting position
 	// Its the place in the array
-	public void traverse(Mazeable maze, Node node) {
+	public void traverse(Node[][] maze, Node node) {
         long time = System.currentTimeMillis();
     	int visitCount = 0;
     	
@@ -53,5 +53,6 @@ public class BruteForceTraversator //implements Traversator
 				}									
 			}			
 		}
-	}*/
+	}
+
 }

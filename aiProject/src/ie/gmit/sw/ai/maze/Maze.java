@@ -2,7 +2,7 @@ package ie.gmit.sw.ai.maze;
 
 /*
  * 
- *  The maze class will be constructed of Nodes which will each be given a certain char
+ *  The maze is constructed of Nodes which each have a certain character
  *  to represent an image
  * 
  */
@@ -10,30 +10,38 @@ package ie.gmit.sw.ai.maze;
 public class Maze 
 {
 	private Node[][] maze;
-	private Node nodeHedge, nodeSpace;
 	
 	// Maze will be initialized when a new instance of maze in created
 	// It takes an int which is used to set the maze size
-	public Maze(int mazeDimension)
+	public Maze(int mazeDimension) throws InterruptedException
 	{
 		
 		// Set size of maze
 		maze = new Node[mazeDimension][mazeDimension];
 		
-		
-		nodeHedge = new Node();
-		nodeSpace = new Node();
-		
-		// set the character '0' to be a hedge
-		nodeHedge.setElement('0');
-		
-		// set the escaped unicode character '\u0020' to be a space
-		nodeSpace.setElement('\u0020');
-		
 		// Create maze with only hedges
 		init();
 		
+		// Add spaces to the maze
 		buildMaze();
+		
+		int featureNumber = (int)((mazeDimension * mazeDimension) * 0.01);
+		
+		// ==========  Features are sent in as Escaped Unicode Which will later be changed into a true numerical form  ==========
+		// ==========  and that will be used to get the image from the BufferedImage array in Sprite class             ==========
+		 
+		addFeature('\u0031', '0', featureNumber); //1 is a sword, 0 is a hedge
+		addFeature('\u0032', '0', featureNumber); //2 is help, 0 is a hedge
+		addFeature('\u0033', '0', featureNumber); //3 is a bomb, 0 is a hedge
+		addFeature('\u0034', '0', featureNumber); //4 is a hydrogen bomb, 0 is a hedge
+		addFeature('\u0036', '0', featureNumber); //6 is a Black Spider, 0 is a hedge
+		addFeature('\u0037', '0', featureNumber); //7 is a Blue Spider, 0 is a hedge
+		addFeature('\u0038', '0', featureNumber); //8 is a Brown Spider, 0 is a hedge
+		addFeature('\u0039', '0', featureNumber); //9 is a Green Spider, 0 is a hedge
+		addFeature('\u003A', '0', featureNumber); //: is a Grey Spider, 0 is a hedge
+		addFeature('\u003B', '0', featureNumber); //; is a Orange Spider, 0 is a hedge
+		addFeature('\u003C', '0', featureNumber); //< is a Red Spider, 0 is a hedge
+		addFeature('\u003D', '0', featureNumber); //= is a Yellow Spider, 0 is a hedge
 		
 		// ==========  FOR TESTING PURPOSES  ==========
 		// Print out the entire maze including borders
@@ -52,11 +60,11 @@ public class Maze
 			for (int col = 0; col < maze[row].length; col++)
 			{
 				
-				// Set nodes in maze to be hedges AKA '0'
-				maze[row][col] = nodeHedge; 
+				// Need to initialize every element in array to a new node
+				maze[row][col] = new Node();
 				
-				// Print out the character at that node
-				//System.out.print(maze[row][col].getElement());
+				// Set nodes in maze to be hedges
+				maze[row][col].setElement('0');
 				
 			}// End inner for
 			
@@ -86,7 +94,7 @@ public class Maze
 				{
 					
 					// Fill node in maze with a space
-					maze[row][col + 1] = nodeSpace; 
+					maze[row][col + 1].setElement('\u0020');; 
 					
 					//System.out.print(maze[row][col + 1].getElement());
 					
@@ -99,9 +107,9 @@ public class Maze
 					{
 						
 						// Fill node in maze with a space
-						maze[row + 1][col] = nodeSpace;
+						maze[row + 1][col].setElement('\u0020');
 						
-					}
+					}// End if
 					
 					//System.out.print(maze[row][col + 1].getElement());
 				}// End if / else
@@ -112,6 +120,35 @@ public class Maze
 		}// End outer for
 		
 	}// End method buildMaze
+	
+	// Add items and spiders to maze
+	// Random elements are selected and if they are hedges 
+	// then get replaced with the item or spider
+	private void addFeature(char feature, char replace, int number) 
+	{
+		int counter = 0;
+		
+		while (counter < feature)
+		{
+			
+			// Generate random number and check that element
+			int row = (int) (maze.length * Math.random());
+			int col = (int) (maze[0].length * Math.random());
+			
+			// element is a hedge 
+			if (maze[row][col].getElement() == replace)
+			{	
+				
+				// put a spider or item in that element
+				maze[row][col].setElement(feature);
+				
+				counter++;
+				
+			}// End if
+			
+		}// End while
+		
+	}// End method addFeature
 	
 	// Print out the entire maze
 	private void printFullMaze()

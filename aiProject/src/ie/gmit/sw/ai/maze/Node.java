@@ -12,6 +12,7 @@ public class Node
 	// element will represent the image in the 
 	// form of a character
 	private char element;
+	private boolean goal;
 	
 	// ==========  Getters / Setters  ==========
 	
@@ -30,5 +31,15 @@ public class Node
 		this.element = element;
 		
 	}// End method setElement
+
+	public boolean isGoal() 
+	{
+		return goal;
+	}// End method isGoal
+
+	public void setGoal(boolean goal)
+	{
+		this.goal = goal;
+	}// End method setGoal
 	
 }// End class Node

@@ -11,6 +11,12 @@ import javax.swing.JFrame;
 /*
  * 
  *  This class will be used for starting the game
+ *  
+ *  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  NOTES  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ *  - Next thing to do is get the spartan to move around the maze using an algorithm 
+ *  - Pass in the maze and Spartan location into one of the algorithms
+ *  - Looks likely this will be done in the placePlayer method or the updateView method
+ *  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  * 
  */
 public class GameRunner implements KeyListener
@@ -96,6 +102,7 @@ public class GameRunner implements KeyListener
 		
     	currentRow = (int) (MAZE_DIMENSION * Math.random());
     	currentCol = (int) (MAZE_DIMENSION * Math.random());
+    	
     	maze.set(currentRow, currentCol, '5'); //A Spartan warrior is at index 5
     	updateView(); 		
 	}

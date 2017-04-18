@@ -43,6 +43,8 @@ public class Maze
 		addFeature('\u003C', '0', featureNumber); //< is a Red Spider, 0 is a hedge
 		addFeature('\u003D', '0', featureNumber); //= is a Yellow Spider, 0 is a hedge
 		
+		insertGoalNode();
+		
 		// ==========  FOR TESTING PURPOSES  ==========
 		// Print out the entire maze including borders
 		printFullMaze();
@@ -120,6 +122,14 @@ public class Maze
 		}// End outer for
 		
 	}// End method buildMaze
+	
+	private void insertGoalNode()
+	{
+		
+		maze[20][70].setElement('G');
+		maze[20][70].setGoal(true);
+		
+	}
 	
 	// Add items and spiders to maze
 	// Random elements are selected and if they are hedges 

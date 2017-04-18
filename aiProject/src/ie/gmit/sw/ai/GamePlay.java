@@ -14,26 +14,32 @@ import ie.gmit.sw.ai.maze.MazeGenerator;
 public class GamePlay implements KeyListener
 {
 	
-	private static final int MAZE_DIMENSION = 100;
-	private static final int IMAGE_COUNT = 14;
-	private GameView view;
+	private static final int MAZE_DIMENSION = 100; // Set size of maze
+	private static final int IMAGE_COUNT = 14; // Number of images
+	private GameView view; 
 	private MazeGenerator model;
+	private Player player;
+	private Node node;
 	private int currentRow;
 	private int currentCol;
-	private  boolean isGameOver;
+	boolean isGameOver;
 	
 	public GamePlay() throws Exception {
 		
 		// Set game state
 		isGameOver = false;
 		
+		// Build the maze to a set dimension
 		model = new Maze(MAZE_DIMENSION);
+		
+		// 
 		view = new GameView(model);
 
 		// Initialize sprites 
 		Sprite[] sprites = getSprites();
 		view.setSprites(sprites);
 
+		// Place player into the maze
 		placePlayer();
 
 		Dimension d = new Dimension(GameView.DEFAULT_VIEW_SIZE, GameView.DEFAULT_VIEW_SIZE);
@@ -41,6 +47,7 @@ public class GamePlay implements KeyListener
 		view.setMinimumSize(d);
 		view.setMaximumSize(d);
 
+		// GUI 
 		JFrame f = new JFrame("GMIT - B.Sc. in Computing (Software Development)");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.addKeyListener(this);
@@ -51,11 +58,14 @@ public class GamePlay implements KeyListener
 		f.pack();
 		f.setVisible(true);
 		
-	}
+	}// End constructor GamePlay()
 
-	private void placePlayer() throws InterruptedException {
+	// Start player in a random position in the maze
+	private void placePlayer() throws InterruptedException 
+	{
 		currentRow = (int) (MAZE_DIMENSION * Math.random());
 		currentCol = (int) (MAZE_DIMENSION * Math.random());
+		// Need this code for each character
 		model.set(currentRow, currentCol, '5'); // A Spartan warrior is at index 5
 		updateView();
 	}
@@ -126,7 +136,9 @@ public class GamePlay implements KeyListener
 		}
 	}
 
-	private Sprite[] getSprites() throws Exception {
+	private Sprite[] getSprites() throws Exception 
+	{
+		
 		// Read in the images from the resources directory as sprites. Note that
 		// each
 		// sprite will be referenced by its index in the array, e.g. a 3 implies
@@ -147,6 +159,7 @@ public class GamePlay implements KeyListener
 		sprites[11] = new Sprite("Orange Spider", "resources/orange_spider_1.png", "resources/orange_spider_2.png");
 		sprites[12] = new Sprite("Red Spider", "resources/red_spider_1.png", "resources/red_spider_2.png");
 		sprites[13] = new Sprite("Yellow Spider", "resources/yellow_spider_1.png", "resources/yellow_spider_2.png");
+		
 		return sprites;
 	}
 

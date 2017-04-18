@@ -58,11 +58,13 @@ public class GameRunner implements KeyListener
 		Sprite[] sprites = getSprites();
     	view.setSprites(sprites);
     	
+    	//System.out.println("Here");
+    	
     	// Position player in the maze
 		// Initialize node to starting position
 		placePlayer();
 		
-		printFullMaze();
+		//printFullMaze();
     	
     	Dimension d = new Dimension(GameView.DEFAULT_VIEW_SIZE, GameView.DEFAULT_VIEW_SIZE);
     	view.setPreferredSize(d);
@@ -119,10 +121,13 @@ public class GameRunner implements KeyListener
     	n.setCol(currentCol);*/
     	
     	Node n = new Node(currentRow, currentRow, '5');
-    	System.out.println("Player stats: " + n.getRow() + " " + n.getCol() + " " + n.getElement());
+    	//System.out.println("Player stats: " + n.getRow() + " " + n.getCol() + " " + n.getElement());
     	
+    	//   *****************************************************************************
+    	//   =====================  Code never comes back from here  =====================
+    	//   *****************************************************************************
     	// Start traversing
-    	//t.traverse(maze.getMaze(), n);
+    	t.traverse(maze.getMaze(), n);
     	
     	updateView(); 		
 	}

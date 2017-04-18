@@ -10,7 +10,6 @@ public class BruteForceTraversator implements Traversator
 	public BruteForceTraversator(boolean depthFirst)
 	{
 		this.dfs = depthFirst;
-		//SoundEffects.init();
 	}
 	
 	// node in this case is the starting position
@@ -18,8 +17,7 @@ public class BruteForceTraversator implements Traversator
 	public void traverse(Node[][] maze, Node node) 
 	{
 		
-		//System.out.println("Node is: " + node.getElement());
-		//System.out.println("Node Path: " + node.getRow() + " " + node.getCol());
+		System.out.println("Node Stats: " + node.getRow() + " " + node.getCol() + " " + node.getElement());
 		
         long time = System.currentTimeMillis();
     	int visitCount = 0;
@@ -29,12 +27,16 @@ public class BruteForceTraversator implements Traversator
 		// Put starting position into the queue
 		queue.offer(node);
 		
+		System.out.println("Queue Size: " + queue.size());
+		
 		// While queue is not empty
 		while (!queue.isEmpty())
 		{
 			
 			node = queue.poll();
 			node.setVisited(true);
+			
+			System.out.println("Node Stats: " + node.getRow() + " " + node.getCol() + " " + node.getElement() + node.isVisited());
 			visitCount++;
 			
 			//System.out.println("Node Path: " + node.getRow() + " " + node.getCol() + " " + node.getElement());

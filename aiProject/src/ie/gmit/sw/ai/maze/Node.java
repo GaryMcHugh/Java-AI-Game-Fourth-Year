@@ -66,9 +66,11 @@ public class Node
 		this.isGoal = goal;
 	}// End method setGoal
 
+	// ==========  Dumbass =========
+	// parameter was boolean visited
 	public void setVisited(boolean b) 
 	{
-		this.visited = visited;
+		this.visited = b;
 	}
 
 	public boolean isVisited() {

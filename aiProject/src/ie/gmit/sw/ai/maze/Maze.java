@@ -7,9 +7,16 @@ package ie.gmit.sw.ai.maze;
  * 
  */
 
+// ================================= IMPORTANT  ================================
+// **** When maze is built every node should have it's position initialized **** 
+// =============================================================================
+
 public class Maze 
 {
 	private Node[][] maze;
+	
+	// Represents the player
+	//private Node playerStart;
 	
 	// Maze will be initialized when a new instance of maze in created
 	// It takes an int which is used to set the maze size
@@ -45,9 +52,11 @@ public class Maze
 		
 		insertGoalNode();
 		
+		//insertPlayer();
+		
 		// ==========  FOR TESTING PURPOSES  ==========
 		// Print out the entire maze including borders
-		printFullMaze();
+		//printFullMaze();
 		
 	}// End constructor Maze
 	
@@ -63,10 +72,10 @@ public class Maze
 			{
 				
 				// Need to initialize every element in array to a new node
-				maze[row][col] = new Node();
+				maze[row][col] = new Node(row, col, '0');
 				
 				// Set nodes in maze to be hedges
-				maze[row][col].setElement('0');
+				//maze[row][col].setElement('0');
 				
 			}// End inner for
 			
@@ -126,10 +135,21 @@ public class Maze
 	private void insertGoalNode()
 	{
 		
+		// randomly generate number and make sure it's equal  to a space
+		// then insert into maze
+		
 		maze[20][70].setElement('G');
-		maze[20][70].setGoal(true);
+		maze[20][70].setGoalNode(true);
 		
 	}
+	
+	/*private void insertPlayer()
+	{
+		
+		playerStart = new Node();
+		setPlayerStart(playerStart);
+		
+	}*/
 	
 	// Add items and spiders to maze
 	// Random elements are selected and if they are hedges 
@@ -192,7 +212,8 @@ public class Maze
 	
 	public void set(int row, int col, char c) 
 	{
-		this.maze[row][col].setElement(c);;
+		this.maze[row][col].setElement(c);
+		
 	}
 	
 	// Returns the size of the maze
@@ -202,5 +223,25 @@ public class Maze
 		return this.maze.length;
 		
 	}// End method size
+
+	public Node[][] getMaze() {
+		return maze;
+	}
+
+	public void setMaze(Node[][] maze) {
+		this.maze = maze;
+	}
+
+	/*public Node getPlayerStart()
+	{
+		return playerStart;
+	}
+
+	public void setPlayerStart(Node playerStart)
+	{
+		this.playerStart = playerStart;
+		this.maze[5][5].setElement('5');
+		this.maze[5][5] = this.playerStart;
+	}*/
 	
 }// End class Maze

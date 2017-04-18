@@ -7,7 +7,6 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
-
 /*
  * 
  *  This class will be used for starting the game
@@ -32,9 +31,12 @@ public class GameRunner implements KeyListener
 	private Maze maze;
 	private GameView view;
 	
-	private int currentRow;
-	private int currentCol;
-	
+	private int currentRow = 5;
+	private int currentCol = 5;
+		
+	 // Algorithm to use
+    Traversator t = new BruteForceTraversator(true);
+		
 	// Main method to start the game 
 	public static void main(String[] args) throws Exception 
 	{
@@ -59,6 +61,8 @@ public class GameRunner implements KeyListener
     	// Position player in the maze
 		// Initialize node to starting position
 		placePlayer();
+		
+		printFullMaze();
     	
     	Dimension d = new Dimension(GameView.DEFAULT_VIEW_SIZE, GameView.DEFAULT_VIEW_SIZE);
     	view.setPreferredSize(d);
@@ -77,7 +81,9 @@ public class GameRunner implements KeyListener
 		
 	}// End constructor GameRunner
 	
-	private Sprite[] getSprites() throws Exception{
+	private Sprite[] getSprites() throws Exception
+	{
+		
 		//Read in the images from the resources directory as sprites. Note that each
 		//sprite will be referenced by its index in the array, e.g. a 3 implies a Bomb...
 		//Ideally, the array should dynamically created from the images... 
@@ -100,18 +106,65 @@ public class GameRunner implements KeyListener
 	}
 	private void placePlayer(){   	
 		
-    	currentRow = (int) (MAZE_DIMENSION * Math.random());
-    	currentCol = (int) (MAZE_DIMENSION * Math.random());
+    	//currentRow = (int) (MAZE_DIMENSION * Math.random());
+    	//currentCol = (int) (MAZE_DIMENSION * Math.random());
     	
+    	//maze.set(currentRow, currentCol, '5')
+		
+		// ======================  Have to set spartan in maze or he won't show up in game view ======================
     	maze.set(currentRow, currentCol, '5'); //A Spartan warrior is at index 5
+    	
+    	/*Node n = maze.getMaze()[currentRow][currentCol];
+    	n.setRow(currentRow);
+    	n.setCol(currentCol);*/
+    	
+    	Node n = new Node(currentRow, currentRow, '5');
+    	System.out.println("Player stats: " + n.getRow() + " " + n.getCol() + " " + n.getElement());
+    	
+    	// Start traversing
+    	//t.traverse(maze.getMaze(), n);
+    	
     	updateView(); 		
 	}
+	
+	/*private Node initializePlayer()
+	{
+		
+		playerStart = new Node();
+		playerStart.setElement('5');
+		playerStart.getPlayer();
+		maze.getMaze()[1][1] = playerStart;
+		updateView();
+		return playerStart;
+		
+	}*/
 	
 	private void updateView()
 	{
 		view.setCurrentRow(currentRow);
 		view.setCurrentCol(currentCol);
 	}
+	
+	private void printFullMaze()
+	{
+		
+		// Loop through the whole array
+		for (int row = 0; row < maze.getMaze().length; row++)
+		{
+			
+			for (int col = 0; col < maze.getMaze()[row].length; col++)
+			{
+				
+				// Print out the character at that node
+				System.out.print(maze.getMaze()[row][col].getElement());
+				
+			}// End inner for
+			
+			System.out.println();
+			
+		}// End outer for
+		
+	}// End method printFullMaze
 
 	// ==========  IGNORE  ==========
 	public void keyPressed(KeyEvent e) 

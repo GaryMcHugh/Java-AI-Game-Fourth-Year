@@ -1,5 +1,7 @@
 package ie.gmit.sw.ai.maze;
 
+import ie.gmit.sw.ai.characters.Spider;
+
 /*
  * 
  *  The maze is constructed of Nodes which each have a certain character
@@ -169,8 +171,21 @@ public class Maze
 			if (maze[row][col].getElement() == replace)
 			{	
 				
-				// put a spider or item in that element
-				maze[row][col].setElement(feature);
+				if(row % 2 == 0)
+				{
+					// put a spider or item in that element
+					maze[row][col].setElement(feature);
+					maze[row][col] = new Spider(row, col, 'B', maze, null);
+					
+				}
+				else{
+					
+					// put a spider or item in that element
+					maze[row][col].setElement(feature);
+					maze[row][col] = new Spider(row, col, 'K', maze, null);
+					
+				}
+				
 				
 				counter++;
 				

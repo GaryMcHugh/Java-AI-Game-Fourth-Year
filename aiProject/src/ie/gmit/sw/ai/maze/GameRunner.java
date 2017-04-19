@@ -78,7 +78,7 @@ public class GameRunner implements KeyListener
     	
     	// Player node 
     	player = new Player(currentRow, currentCol, '5', maze.getMaze());
-    	//spider = new Spider(currentRow + 10, currentCol + 10, '6', maze.getMaze());
+    	spider = new Spider(currentRow + 10, currentCol + 10, '6', maze.getMaze(), player);
     	
     	//view.setPlayer(player);
     	
@@ -88,11 +88,11 @@ public class GameRunner implements KeyListener
     		
     	}
     	
-		t = new BruteForceTraversator(true, player);
+		//t = new BruteForceTraversator(true, player);
 		//spiderT = new BruteForceTraversator(true, spider);
 		
 		//spiderT.traverse(maze.getMaze(), spider);
-		t.traverse(maze.getMaze(), player);
+		//t.traverse(maze.getMaze(), player);
 		
     		
 	}// End constructor GameRunner

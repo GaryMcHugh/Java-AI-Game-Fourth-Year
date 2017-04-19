@@ -3,18 +3,28 @@ package ie.gmit.sw.ai.maze;
 import java.util.*;
 
 import ie.gmit.sw.ai.characters.Player;
+import ie.gmit.sw.ai.characters.Spider;
 
 public class BruteForceTraversator implements Traversator
 {
 	
 	private boolean dfs = false;
 	private Player player;
+	private Spider spider;
 	
 	// Pass in player (Will need an initialized player)
 	public BruteForceTraversator(boolean depthFirst, Player player) throws Exception
 	{
 		this.dfs = depthFirst;
 		this.player = player;
+		
+	}
+	
+	public BruteForceTraversator(boolean depthFirst, Spider spider) throws Exception
+	{
+		this.dfs = depthFirst;
+		this.spider = spider;
+		
 		
 	}
 	
@@ -50,6 +60,9 @@ public class BruteForceTraversator implements Traversator
 			// ======================  Updates character in maze  ======================
 			player.setRow(node.getRow());
 			player.setCol(node.getCol());
+			
+			//spider.setRow(node.getRow());
+			//spider.setCol(node.getCol());
 			
 			if (node.isGoalNode())
 			{

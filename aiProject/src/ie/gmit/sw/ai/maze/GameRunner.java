@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
 import ie.gmit.sw.ai.characters.Player;
+import ie.gmit.sw.ai.characters.Spider;
 
 /*
  * 
@@ -37,9 +38,10 @@ public class GameRunner implements KeyListener
 	private int currentCol = 5;
 	
 	private Player player;
+	private Spider spider;
 		
 	 // Algorithm to use
-    private Traversator t;
+    private Traversator t, spiderT;
 		
 	// Main method to start the game 
 	public static void main(String[] args) throws Exception 
@@ -62,8 +64,6 @@ public class GameRunner implements KeyListener
 		Sprite[] sprites = getSprites();
     	view.setSprites(sprites);
     	
-    	
-    	
     	// Position player in the maze
 	    // Initialize node to starting position
 	    placePlayer();
@@ -78,14 +78,9 @@ public class GameRunner implements KeyListener
     	
     	// Player node 
     	player = new Player(currentRow, currentCol, '5', maze.getMaze());
+    	//spider = new Spider(currentRow + 10, currentCol + 10, '6', maze.getMaze());
     	
-    	if(player == null)
-    	{
-    		
-    		System.out.println("Player is null in gamerunner");
-    	}
-    	
-    	view.setPlayer(player);
+    	//view.setPlayer(player);
     	
     	if(maze.getMaze() == null)
     	{
@@ -94,7 +89,11 @@ public class GameRunner implements KeyListener
     	}
     	
 		t = new BruteForceTraversator(true, player);
+		//spiderT = new BruteForceTraversator(true, spider);
+		
+		//spiderT.traverse(maze.getMaze(), spider);
 		t.traverse(maze.getMaze(), player);
+		
     		
 	}// End constructor GameRunner
 	

@@ -2,32 +2,39 @@ package ie.gmit.sw.ai.maze;
 
 import java.util.*;
 
+import ie.gmit.sw.ai.characters.Player;
+
 public class BruteForceTraversator implements Traversator
 {
 	
 	private boolean dfs = false;
+	private Player player;
 	
-	public BruteForceTraversator(boolean depthFirst)
+	// Pass in player (Will need an initialized player)
+	public BruteForceTraversator(boolean depthFirst, Player player) throws Exception
 	{
 		this.dfs = depthFirst;
+		this.player = player;
+		
 	}
 	
 	// node in this case is the starting position
 	// Its the place in the array
-	public void traverse(Node[][] maze, Node node) 
+	public void traverse(Node[][] maze, Node node)
 	{
 		
-		System.out.println("Node Stats: " + node.getRow() + " " + node.getCol() + " " + node.getElement());
+		//System.out.println("Node Stats: " + node.getRow() + " " + node.getCol() + " " + node.getElement());
 		
         long time = System.currentTimeMillis();
     	int visitCount = 0;
+    	//int [] position = new int[2];
     	
 		Deque<Node> queue = new LinkedList<Node>();
 		
 		// Put starting position into the queue
 		queue.offer(node);
 		
-		System.out.println("Queue Size: " + queue.size());
+		//System.out.println("Queue Size: " + queue.size());
 		
 		// While queue is not empty
 		while (!queue.isEmpty())
@@ -36,21 +43,35 @@ public class BruteForceTraversator implements Traversator
 			node = queue.poll();
 			node.setVisited(true);
 			
-			System.out.println("Node Stats: " + node.getRow() + " " + node.getCol() + " " + node.getElement() + node.isVisited());
 			visitCount++;
 			
-			//System.out.println("Node Path: " + node.getRow() + " " + node.getCol() + " " + node.getElement());
+			System.out.println("Node Path: " + node.getRow() + " " + node.getCol() + " " + node.getElement());
 			
-			if (node.isGoalNode()){
+			// ======================  Updates character in maze  ======================
+			player.setRow(node.getRow());
+			player.setCol(node.getCol());
+			
+			if (node.isGoalNode())
+			{
+				
 		        time = System.currentTimeMillis() - time; //Stop the clock
+		        
 		        //TraversatorStats.printStats(node, time, visitCount);
+		        System.out.println("Found goal node at " +  node.getRow() + " " + node.getCol() + " " + node.getElement() + node.isVisited());
+		        
 				break;
+				
 			}
 			
-			try { //Simulate processing each expanded node				
-				Thread.sleep(10);						
+			//Simulate processing each expanded node	
+			try { 		
+				
+				Thread.sleep(10);	
+				
 			} catch (InterruptedException e) {
+				
 				e.printStackTrace();
+				
 			}
 			
 			//Node[] children = node.children(maze);
@@ -74,6 +95,12 @@ public class BruteForceTraversator implements Traversator
 					}
 				}									
 			}			
-		}
-	}
-}
+			
+		}// End while
+		
+	}// End traverse
+	
+}// End class BruteForceTraversator
+
+
+

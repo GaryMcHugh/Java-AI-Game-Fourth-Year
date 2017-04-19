@@ -7,6 +7,8 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
+import ie.gmit.sw.ai.characters.Player;
+
 /*
  * 
  *  This class will be used for starting the game
@@ -33,9 +35,11 @@ public class GameRunner implements KeyListener
 	
 	private int currentRow = 5;
 	private int currentCol = 5;
+	
+	private Player player;
 		
 	 // Algorithm to use
-    Traversator t = new BruteForceTraversator(true);
+    private Traversator t;
 		
 	// Main method to start the game 
 	public static void main(String[] args) throws Exception 
@@ -58,29 +62,40 @@ public class GameRunner implements KeyListener
 		Sprite[] sprites = getSprites();
     	view.setSprites(sprites);
     	
-    	//System.out.println("Here");
+    	
     	
     	// Position player in the maze
-		// Initialize node to starting position
-		placePlayer();
-		
+	    // Initialize node to starting position
+	    placePlayer();
+    	
 		//printFullMaze();
     	
-    	Dimension d = new Dimension(GameView.DEFAULT_VIEW_SIZE, GameView.DEFAULT_VIEW_SIZE);
-    	view.setPreferredSize(d);
-    	view.setMinimumSize(d);
-    	view.setMaximumSize(d);
+    	// Sets size of the game view
+    	setGameDimension();
     	
-    	JFrame f = new JFrame("GMIT - B.Sc. in Computing (Software Development)");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.addKeyListener(this);
-        f.getContentPane().setLayout(new FlowLayout());
-        f.add(view);
-        f.setSize(1000,1000);
-        f.setLocation(100,100);
-        f.pack();
-        f.setVisible(true);
-		
+    	// Builds the window for the game view
+    	buildWindow();
+    	
+    	// Player node 
+    	player = new Player(currentRow, currentCol, '5', maze.getMaze());
+    	
+    	if(player == null)
+    	{
+    		
+    		System.out.println("Player is null in gamerunner");
+    	}
+    	
+    	view.setPlayer(player);
+    	
+    	if(maze.getMaze() == null)
+    	{
+    		System.out.println("Maze is null");
+    		
+    	}
+    	
+		t = new BruteForceTraversator(true, player);
+		t.traverse(maze.getMaze(), player);
+    		
 	}// End constructor GameRunner
 	
 	private Sprite[] getSprites() throws Exception
@@ -106,48 +121,47 @@ public class GameRunner implements KeyListener
 		sprites[13] = new Sprite("Yellow Spider", "resources/yellow_spider_1.png", "resources/yellow_spider_2.png");
 		return sprites;
 	}
-	private void placePlayer(){   	
-		
-    	//currentRow = (int) (MAZE_DIMENSION * Math.random());
-    	//currentCol = (int) (MAZE_DIMENSION * Math.random());
-    	
-    	//maze.set(currentRow, currentCol, '5')
-		
+	
+	private void placePlayer()
+	{   
 		// ======================  Have to set spartan in maze or he won't show up in game view ======================
-    	maze.set(currentRow, currentCol, '5'); //A Spartan warrior is at index 5
+		//A Spartan warrior is at index 5
+    	maze.set(currentRow, currentCol, '5'); 
     	
-    	/*Node n = maze.getMaze()[currentRow][currentCol];
-    	n.setRow(currentRow);
-    	n.setCol(currentCol);*/
-    	
-    	Node n = new Node(currentRow, currentRow, '5');
-    	//System.out.println("Player stats: " + n.getRow() + " " + n.getCol() + " " + n.getElement());
-    	
-    	//   *****************************************************************************
-    	//   =====================  Code never comes back from here  =====================
-    	//   *****************************************************************************
-    	// Start traversing
-    	t.traverse(maze.getMaze(), n);
-    	
-    	updateView(); 		
+    	view.setCurrentRow(currentRow);
+    	view.setCurrentCol(currentCol);
+    		
 	}
 	
-	/*private Node initializePlayer()
+	private void buildWindow()
 	{
-		
-		playerStart = new Node();
-		playerStart.setElement('5');
-		playerStart.getPlayer();
-		maze.getMaze()[1][1] = playerStart;
-		updateView();
-		return playerStart;
-		
-	}*/
+		JFrame f = new JFrame("GMIT - B.Sc. in Computing (Software Development)");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.addKeyListener(this);
+        f.getContentPane().setLayout(new FlowLayout());
+        f.add(view);
+        f.setSize(1000,1000);
+        f.setLocation(100,100);
+        f.pack();
+        f.setVisible(true);
+	}
 	
-	private void updateView()
+	private void setGameDimension()
 	{
-		view.setCurrentRow(currentRow);
-		view.setCurrentCol(currentCol);
+		
+		Dimension d = new Dimension(GameView.DEFAULT_VIEW_SIZE, GameView.DEFAULT_VIEW_SIZE);
+    	view.setPreferredSize(d);
+    	view.setMinimumSize(d);
+    	view.setMaximumSize(d);
+		
+	}
+	
+	public void updateView()
+	{
+	
+		// Get player values and update them in view
+		view.setCurrentRow(player.getRow());
+		view.setCurrentRow(player.getCol());
 	}
 	
 	private void printFullMaze()
@@ -175,7 +189,7 @@ public class GameRunner implements KeyListener
 	public void keyPressed(KeyEvent e) 
 	{
 		
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT && currentCol < MAZE_DIMENSION - 1) {
+		/*if (e.getKeyCode() == KeyEvent.VK_RIGHT && currentCol < MAZE_DIMENSION - 1) {
         	if (isValidMove(currentRow, currentCol + 1)) currentCol++;   		
         }else if (e.getKeyCode() == KeyEvent.VK_LEFT && currentCol > 0) {
         	if (isValidMove(currentRow, currentCol - 1)) currentCol--;	
@@ -189,7 +203,7 @@ public class GameRunner implements KeyListener
         	return;
         }
         
-        updateView(); 
+        updateView(); */
 		
 	}
 
@@ -203,6 +217,7 @@ public class GameRunner implements KeyListener
 			return false; //Can't move
 		}
 	}
+	
 	public void keyReleased(KeyEvent e) {}
 
 	public void keyTyped(KeyEvent e) {}

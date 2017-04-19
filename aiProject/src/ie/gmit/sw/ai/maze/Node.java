@@ -92,67 +92,7 @@ public class Node
 		return false;
 	}
 	
-	// Edited children method
-	/*public Node[] children(Node[][] maze)
-	{
-		
-		//System.out.println(maze.length);
-		
-		// Gets all four children available.
-		Node[] children = new Node[4];
-		
-		//System.out.println(children.length);
-		
-		//System.out.println("Element "+ node.getElement());
-
-		if (col - 1 >= 0 && maze[row][col - 1].getElement() != '0')
-		{
-			System.out.println("In West");
-			
-			children[0] = maze[row][col - 1]; // A West edge
-		}
-			
-
-		if (col + 1 < maze[row].length && maze[row][col + 1].getElement() != '0')
-		{
-			System.out.println("In East");
-			children[1] = maze[row][col + 1]; // An East Edge
-		}
-			
-
-		if (row - 1 >= 0 && maze[row - 1][col].getElement() != '0')
-		{
-			System.out.println("In North");
-			children[2] = maze[row - 1][col]; // A North edge
-		}
-			
-			
-		if (row + 1 < maze.length && maze[row + 1][col].getElement() != '0')
-		{
-			System.out.println("In South");
-			children[3] = maze[row + 1][col]; // An South Edge
-		}
-
-		int counter = 0;
-		for (int i = 0; i < children.length; i++) { // goes through each child
-			if (children[i] != null) // if child is not empty
-				counter++; // increment counter
-		}
-
-		// this makes sure the array length is correct (2, 3 or 4)
-		Node[] tmp = new Node[counter]; // array with length of 2, 3 or 4
-		int index = 0;
-		for (int i = 0; i < children.length; i++) {// goes through each child
-			if (children[i] != null) { // copy all children into tmp
-				tmp[index] = children[i];
-				index++;
-			}
-		}
-
-		return children;
-	}*/
-	
-	/*public Node[] children(Node[][] maze)
+	public Node[] children(Node[][] maze)
 	{
 		
 		java.util.List<Node> children = new java.util.ArrayList<Node>();
@@ -163,7 +103,7 @@ public class Node
 		if (col < maze[row].length - 1 && maze[row][col + 1].hasDirection(Direction.West)) children.add(maze[row][col + 1]); //Add East
 		
 		return (Node[]) children.toArray(new Node[children.size()]);
-	}*/
+	}
 	
 	public Node[] adjacentNodes(Node[][] maze)
 	{

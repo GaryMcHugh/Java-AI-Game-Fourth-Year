@@ -138,8 +138,8 @@ public class Maze
 		// randomly generate number and make sure it's equal  to a space
 		// then insert into maze
 		
-		maze[20][70].setElement('G');
-		maze[20][70].setGoalNode(true);
+		maze[10][10].setElement('G');
+		maze[10][10].setGoalNode(true);
 		
 	}
 	
@@ -205,6 +205,8 @@ public class Maze
 	// Get node from maze
 	public char get(int row, int col)
 	{
+		
+		//System.out.println("Maze position" + this.maze[row][col].getElement());
 		// Return specific node
 		return this.maze[row][col].getElement();
 		

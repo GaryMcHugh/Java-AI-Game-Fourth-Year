@@ -17,6 +17,7 @@ public class Maze
 {
 	private Node[][] maze;
 	
+	private final int Num_Of_Enemies = 15;
 	// Represents the player
 	//private Node playerStart;
 	
@@ -39,18 +40,19 @@ public class Maze
 		// ==========  Features are sent in as Escaped Unicode Which will later be changed into a true numerical form  ==========
 		// ==========  and that will be used to get the image from the BufferedImage array in Sprite class             ==========
 		 
-		addFeature('\u0031', '0', featureNumber); //1 is a sword, 0 is a hedge
+		/*addFeature('\u0031', '0', featureNumber); //1 is a sword, 0 is a hedge
 		addFeature('\u0032', '0', featureNumber); //2 is help, 0 is a hedge
 		addFeature('\u0033', '0', featureNumber); //3 is a bomb, 0 is a hedge
 		addFeature('\u0034', '0', featureNumber); //4 is a hydrogen bomb, 0 is a hedge
-		addFeature('\u0036', '0', featureNumber); //6 is a Black Spider, 0 is a hedge
-		addFeature('\u0037', '0', featureNumber); //7 is a Blue Spider, 0 is a hedge
-		addFeature('\u0038', '0', featureNumber); //8 is a Brown Spider, 0 is a hedge
-		addFeature('\u0039', '0', featureNumber); //9 is a Green Spider, 0 is a hedge
-		addFeature('\u003A', '0', featureNumber); //: is a Grey Spider, 0 is a hedge
-		addFeature('\u003B', '0', featureNumber); //; is a Orange Spider, 0 is a hedge
-		addFeature('\u003C', '0', featureNumber); //< is a Red Spider, 0 is a hedge
-		addFeature('\u003D', '0', featureNumber); //= is a Yellow Spider, 0 is a hedge
+*/		
+		addFeature('\u0036', '0', featureNumber, "Black");  //6 is a Black Spider, 0 is a hedge
+		addFeature('\u0037', '0', featureNumber, "Blue");   //7 is a Blue Spider, 0 is a hedge
+		addFeature('\u0038', '0', featureNumber, "Brown");  //8 is a Brown Spider, 0 is a hedge
+		addFeature('\u0039', '0', featureNumber, "Green");  //9 is a Green Spider, 0 is a hedge
+		addFeature('\u003A', '0', featureNumber, "Grey");   //: is a Grey Spider, 0 is a hedge
+		addFeature('\u003B', '0', featureNumber, "Orange"); //; is a Orange Spider, 0 is a hedge
+		addFeature('\u003C', '0', featureNumber, "Red");    //< is a Red Spider, 0 is a hedge
+		addFeature('\u003D', '0', featureNumber, "Yellow"); //= is a Yellow Spider, 0 is a hedge
 		
 		insertGoalNode();
 		
@@ -156,13 +158,13 @@ public class Maze
 	// Add items and spiders to maze
 	// Random elements are selected and if they are hedges 
 	// then get replaced with the item or spider
-	private void addFeature(char feature, char replace, int number) 
+	private void addFeature(char feature, char replace, int number, String name) // Could pass in name or enum then use that as case statement in spider class
 	{
 		int counter = 0;
 		
-		while (counter < feature)
+		while (counter < Num_Of_Enemies)
 		{
-			
+		
 			// Generate random number and check that element
 			int row = (int) (maze.length * Math.random());
 			int col = (int) (maze[0].length * Math.random());
@@ -171,7 +173,7 @@ public class Maze
 			if (maze[row][col].getElement() == replace)
 			{	
 				
-				if(row % 2 == 0)
+				/*if(row % 2 == 0)
 				{
 					// put a spider or item in that element
 					maze[row][col].setElement(feature);
@@ -184,8 +186,15 @@ public class Maze
 					maze[row][col].setElement(feature);
 					maze[row][col] = new Spider(row, col, 'K', maze, null);
 					
-				}
+				}*/
 				
+				if(feature >= '\u0036')
+				{
+					
+					maze[row][col] = new Spider(row, col, feature, maze, null, (name + counter));// Unique spider name
+					
+					//maze[row][col].setElement(feature); // Old code
+				}
 				
 				counter++;
 				
@@ -196,7 +205,7 @@ public class Maze
 	}// End method addFeature
 	
 	// Print out the entire maze
-	private void printFullMaze()
+	/*private void printFullMaze()
 	{
 		
 		// Loop through the whole array
@@ -216,7 +225,7 @@ public class Maze
 		}// End outer for
 		
 	}// End method printFullMaze
-	
+*/	
 	// Get node from maze
 	public char get(int row, int col)
 	{

@@ -78,15 +78,9 @@ public class GameRunner implements KeyListener
     	
     	// Player node 
     	player = new Player(currentRow, currentCol, '5', maze.getMaze());
-    	spider = new Spider(currentRow + 10, currentCol + 10, '6', maze.getMaze(), player);
+    	//spider = new Spider(currentRow + 10, currentCol + 10, '6', maze.getMaze(), player);
     	
     	//view.setPlayer(player);
-    	
-    	if(maze.getMaze() == null)
-    	{
-    		System.out.println("Maze is null");
-    		
-    	}
     	
 		//t = new BruteForceTraversator(true, player);
 		//spiderT = new BruteForceTraversator(true, spider);

@@ -55,7 +55,8 @@ public class BruteForceTraversator implements Traversator
 			
 			visitCount++;
 			
-			System.out.println("Spider Node Path: " + node.getElement() + " " + node.getRow() + " " + node.getCol() + " " + node.getElement());
+			//System.out.println("Spider Node Path: " + node.getElement() + " " + node.getRow() + " " + node.getCol() + " " + node.getElement());
+			System.out.println(node.getName() + " Path " + node.getRow() + " " + node.getCol() + " " + node.getElement());
 			
 			// ======================  Updates character in maze  ======================
 			player.setRow(node.getRow());

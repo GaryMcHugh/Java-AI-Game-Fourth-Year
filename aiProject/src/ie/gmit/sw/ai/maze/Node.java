@@ -22,6 +22,7 @@ public class Node
 	private Node parent;
 	private Node player;
 	private Direction[] paths = null;
+	private String name;
 	
 	// Track current location 
 	private int row;
@@ -183,6 +184,16 @@ public class Node
 	public void setCol(int col)
 	{
 		this.col = col;
+	}
+
+	public String getName() 
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 	
 }// End class Node

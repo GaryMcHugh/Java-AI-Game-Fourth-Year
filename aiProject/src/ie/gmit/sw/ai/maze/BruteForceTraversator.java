@@ -46,8 +46,34 @@ public class BruteForceTraversator implements Traversator
 		while (!queue.isEmpty())
 		{
 			
+			// First time through is the current node
 			node = queue.poll();
+			
+			// Set current node to true
 			node.setVisited(true);
+			
+			// Swap spartan position here
+			// node is new node
+			// Parent is the old node
+			
+			if(node.getParent() != null)
+			{
+				
+				//System.out.println("Parent node is not null");
+				node.swapPosition(maze, node, node.getParent());// pass in new position
+			}
+			
+			/*else if(node.getParent() == null)
+			{
+				
+				maze[node.getRow()][node.getCol()].setElement(node.getElement());
+			}*/
+			
+			/*else{
+				
+				maze[node.getRow()][node.getCol()].setElement('\u0020');
+				
+			}*/
 			
 			visitCount++;
 			
@@ -97,9 +123,12 @@ public class BruteForceTraversator implements Traversator
 				// If child is not null and has not been visited
 				if (children[i] != null && !children[i].isVisited())
 				{
+					
+					// children[i] is a node
 					children[i].setParent(node);
 					
 					if (dfs){
+						// put node in to the queue
 						queue.addFirst(children[i]);
 					}else{
 						queue.addLast(children[i]);

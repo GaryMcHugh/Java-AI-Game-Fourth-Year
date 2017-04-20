@@ -49,7 +49,7 @@ public class Maze
 		addFeature('\u0033', '0', featureNumber, "Bomb"); //3 is a bomb, 0 is a hedge
 		addFeature('\u0034', '0', featureNumber, "Hydrogen Bomb"); //4 is a hydrogen bomb, 0 is a hedge
 	
-		addFeature('\u0036', '0', featureNumber, "Black");  //6 is a Black Spider, 0 is a hedge
+		//addFeature('\u0036', '0', featureNumber, "Black");  //6 is a Black Spider, 0 is a hedge
 		
 		
 		/*addFeature('\u0037', '0', featureNumber, "Blue");   //7 is a Blue Spider, 0 is a hedge

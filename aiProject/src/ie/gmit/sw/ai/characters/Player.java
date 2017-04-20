@@ -28,6 +28,9 @@ public class Player extends Node
 		
 		t = new BruteForceTraversator(true);
 		t.traverse(maze, maze[row][col]);
+		
+		// Swap into new position 
+		
 		//t = new IDDFSTraversator();
 		//t.traverse(maze, maze[row][col]);
 		//t = new RecursiveDFSTraversator();
@@ -77,5 +80,12 @@ public class Player extends Node
 	{
 		this.name = name;
 	}
+	
+	/*public void swapPosition(int row, int col)
+	{
+		
+		maze[row][col].setElement('5');
+		
+	}*/
 
 }// End class Player

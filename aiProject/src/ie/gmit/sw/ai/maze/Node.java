@@ -87,14 +87,6 @@ public class Node
 	public boolean isVisited() {
 		return visited;
 	}
-
-	public Node getParent() {
-		return parent;
-	}
-
-	public void setParent(Node parent) {
-		this.parent = parent;
-	}
 	
 	public boolean hasDirection(Direction direction){	
 		for (int i = 0; i < paths.length; i++) {
@@ -125,13 +117,18 @@ public class Node
 	public Node[] adjacentNodes(Node[][] maze)
 	{
 		
+		// List contains directions which player can go
 		java.util.List<Node> adjacents = new java.util.ArrayList<Node>();
 		
+		// If there is a north path
 		if (row > 0)
 		{
 			
+			// If it isn't a hedge
 			if(maze[row -1][col].getElement() != '0')
 			{
+				
+				// Add this node to list
 				adjacents.add(maze[row - 1][col]);	
 				//System.out.println("Row: " + (row -1) + "\n" + "Col: " + col);
 				
@@ -210,6 +207,31 @@ public class Node
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+	
+	// The current node becomes the Parent node 
+	public Node getParent()
+	{
+		return parent;
+	}
+
+	public void setParent(Node parent)
+	{
+		this.parent = parent;
+	}
+
+	public void swapPosition(Node[][] maze, Node newPosition, Node oldPosition)
+	{	
+		
+		// If the new position is a hedge
+		if(maze[newPosition.getRow()][newPosition.getCol()].getElement() == '0' || maze[newPosition.getRow()][newPosition.getCol()].getElement() == 'G')
+		{
+			// need if to check if's the spartan who's changing the elements in the maze
+			maze[newPosition.getRow()][newPosition.getCol()].setElement('5');
+			maze[oldPosition.getRow()][oldPosition.getCol()].setElement('\u0020');
+			//System.out.println("Current node " + oldPosition.getElement() + "   " + "Parent node " + newPosition.getElement());
+		}
+		
 	}
 	
 }// End class Node

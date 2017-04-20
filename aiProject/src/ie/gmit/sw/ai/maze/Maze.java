@@ -18,7 +18,7 @@ public class Maze
 {
 	
 	// ============  CONTANTS  ============
-	private final int Num_Of_Enemies = 50;
+	private final int Num_Of_Enemies = 1;
 	
 	// ============  Variables  ============
 	private Node[][] maze;
@@ -50,13 +50,15 @@ public class Maze
 		addFeature('\u0034', '0', featureNumber, "Hydrogen Bomb"); //4 is a hydrogen bomb, 0 is a hedge
 	
 		addFeature('\u0036', '0', featureNumber, "Black");  //6 is a Black Spider, 0 is a hedge
-		addFeature('\u0037', '0', featureNumber, "Blue");   //7 is a Blue Spider, 0 is a hedge
+		
+		
+		/*addFeature('\u0037', '0', featureNumber, "Blue");   //7 is a Blue Spider, 0 is a hedge
 		addFeature('\u0038', '0', featureNumber, "Brown");  //8 is a Brown Spider, 0 is a hedge
 		addFeature('\u0039', '0', featureNumber, "Green");  //9 is a Green Spider, 0 is a hedge
 		addFeature('\u003A', '0', featureNumber, "Grey");   //: is a Grey Spider, 0 is a hedge
 		addFeature('\u003B', '0', featureNumber, "Orange"); //; is a Orange Spider, 0 is a hedge
 		addFeature('\u003C', '0', featureNumber, "Red");    //< is a Red Spider, 0 is a hedge
-		addFeature('\u003D', '0', featureNumber, "Yellow"); //= is a Yellow Spider, 0 is a hedge
+		addFeature('\u003D', '0', featureNumber, "Yellow"); //= is a Yellow Spider, 0 is a hedge*/
 		
 		//printFullMaze();
 		

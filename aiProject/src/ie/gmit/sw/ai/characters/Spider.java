@@ -12,7 +12,7 @@ public class Spider extends Node
 {
 
 	private Node[][] maze;
-	private ExecutorService executor = Executors.newFixedThreadPool(1);
+	private ExecutorService executor = Executors.newFixedThreadPool(5);
 	private Player player;
 	private String name;
 
@@ -24,7 +24,7 @@ public class Spider extends Node
 		this.player = player;
 		this.name = name;
 		
-		//System.out.println("Player Constructor" + " Maze: " + maze);
+		System.out.println("Player Constructor" + " Maze: " + maze);
 		
 		/*executor.submit(() -> {
 			
@@ -33,13 +33,19 @@ public class Spider extends Node
 			{
 				
 				//System.out.println(row + " " + col);
-				//Traversator t = new IDDFSTraversator();
+				Traversator t = new IDDFSTraversator();
 				
-				Traversator t = new BruteForceTraversator(true);
+				//Traversator t;
+				try {
+					//t = new BruteForceTraversator(true);
+					//System.out.println("Spider");
+					t.traverse(maze, maze[row][col]);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
-				//System.out.println("Spider");
-				t.traverse(maze, maze[row][col]);
-				
+				break;
 			}// End while
 			
 			

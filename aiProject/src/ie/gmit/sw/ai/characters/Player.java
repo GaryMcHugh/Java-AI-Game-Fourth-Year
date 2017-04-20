@@ -26,10 +26,12 @@ public class Player extends Node
 		this.row = currentRow;
 		this.col = currentCol;
 		
-		//t = new BruteForceTraversator(true);
-		//t.traverse(maze, maze[row][col]);
-		t = new IDDFSTraversator();
+		t = new BruteForceTraversator(true);
 		t.traverse(maze, maze[row][col]);
+		//t = new IDDFSTraversator();
+		//t.traverse(maze, maze[row][col]);
+		//t = new RecursiveDFSTraversator();
+		//t.traverse(maze, maze[row][col]);
 		
 		// When traversing through maze the spartan never actually swaps into a new cell
 		

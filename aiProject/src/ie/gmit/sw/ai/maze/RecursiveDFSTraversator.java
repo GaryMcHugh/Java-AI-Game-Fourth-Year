@@ -1,39 +1,21 @@
 package ie.gmit.sw.ai.maze;
 
-import java.awt.Color;
 import ie.gmit.sw.ai.maze.*;
-
-public class IDDFSTraversator implements Traversator
+public class RecursiveDFSTraversator implements Traversator
 {
 	private Node[][] maze;
 	private boolean keepRunning = true;
 	private long time = System.currentTimeMillis();
 	private int visitCount = 0;
 	
-	public void traverse(Node[][] maze, Node start) {
+	public void traverse(Node[][] maze, Node node) {
 		this.maze = maze;
-		int limit = 1;
-		
-		while(keepRunning){
-			dfs(start, 0, limit);
-			
-			if (keepRunning){
-				
-				try { //Pause before next iteration
-					Thread.sleep(500);
-		      		limit++;       		
-		      		unvisit();	
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}			
-			}
-      	}
+		dfs(node);
 	}
-
-	private void dfs(Node node, int depth, int limit)
-	{
+	
+	private void dfs(Node node){
+		if (!keepRunning) return;
 		
-		if (!keepRunning || depth > limit) return;		
 		node.setVisited(true);	
 		visitCount++;
 		System.out.println(node.getName() + " Path " + node.getRow() + " " + node.getCol() + " " + node.getElement());
@@ -56,22 +38,9 @@ public class IDDFSTraversator implements Traversator
 		for (int i = 0; i < children.length; i++) {
 			if (children[i] != null && !children[i].isVisited()){
 				children[i].setParent(node);
-				dfs(children[i], depth + 1, limit);
-			}
-		}
-	} 
-		
-	private void unvisit()
-	{
-		for (int i = 0; i < maze.length; i++){
-			for (int j = 0; j < maze[i].length; j++){
-				maze[i][j].setVisited(false);
-				maze[i][j].setParent(null);
-				//maze[i][j].setColor(Color.BLACK);
+				dfs(children[i]);
 			}
 		}
 	}
 	
-}//End IDDFSTraversator
-
-
+}// End RecursiveDFSTraversator

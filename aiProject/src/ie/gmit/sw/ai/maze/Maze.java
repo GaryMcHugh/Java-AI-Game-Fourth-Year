@@ -1,6 +1,7 @@
 package ie.gmit.sw.ai.maze;
 
 import ie.gmit.sw.ai.characters.Spider;
+import ie.gmit.sw.ai.characters.Player;
 
 /*
  * 
@@ -15,15 +16,18 @@ import ie.gmit.sw.ai.characters.Spider;
 
 public class Maze 
 {
-	private Node[][] maze;
 	
-	private final int Num_Of_Enemies = 15;
-	// Represents the player
-	//private Node playerStart;
+	// ============  CONTANTS  ============
+	private final int Num_Of_Enemies = 50;
+	
+	// ============  Variables  ============
+	private Node[][] maze;
+	private Player player;
+	private boolean isPlayer = false;
 	
 	// Maze will be initialized when a new instance of maze in created
 	// It takes an int which is used to set the maze size
-	public Maze(int mazeDimension) throws InterruptedException
+	public Maze(int mazeDimension) throws Exception
 	{
 		
 		// Set size of maze
@@ -40,11 +44,11 @@ public class Maze
 		// ==========  Features are sent in as Escaped Unicode Which will later be changed into a true numerical form  ==========
 		// ==========  and that will be used to get the image from the BufferedImage array in Sprite class             ==========
 		 
-		/*addFeature('\u0031', '0', featureNumber); //1 is a sword, 0 is a hedge
-		addFeature('\u0032', '0', featureNumber); //2 is help, 0 is a hedge
-		addFeature('\u0033', '0', featureNumber); //3 is a bomb, 0 is a hedge
-		addFeature('\u0034', '0', featureNumber); //4 is a hydrogen bomb, 0 is a hedge
-*/		
+		addFeature('\u0031', '0', featureNumber, "Sword"); //1 is a sword, 0 is a hedge
+		addFeature('\u0032', '0', featureNumber, "Help-Hedge"); //2 is help, 0 is a hedge
+		addFeature('\u0033', '0', featureNumber, "Bomb"); //3 is a bomb, 0 is a hedge
+		addFeature('\u0034', '0', featureNumber, "Hydrogen Bomb"); //4 is a hydrogen bomb, 0 is a hedge
+	
 		addFeature('\u0036', '0', featureNumber, "Black");  //6 is a Black Spider, 0 is a hedge
 		addFeature('\u0037', '0', featureNumber, "Blue");   //7 is a Blue Spider, 0 is a hedge
 		addFeature('\u0038', '0', featureNumber, "Brown");  //8 is a Brown Spider, 0 is a hedge
@@ -54,13 +58,23 @@ public class Maze
 		addFeature('\u003C', '0', featureNumber, "Red");    //< is a Red Spider, 0 is a hedge
 		addFeature('\u003D', '0', featureNumber, "Yellow"); //= is a Yellow Spider, 0 is a hedge
 		
+		//printFullMaze();
+		
+		// Place goal node for player to search for
 		insertGoalNode();
 		
-		//insertPlayer();
+		addFeature('5', '0', featureNumber, "Spartan");  //5 is the Spartan, 0 is a hedge
+		
+		// =================  NOTE  =================
+		// Player starts searching immediately after 
+		//    the node is set to a place in maze 
+		// ==========================================
+		//addPlayer(5, 5);
+		
 		
 		// ==========  FOR TESTING PURPOSES  ==========
 		// Print out the entire maze including borders
-		//printFullMaze();
+		printFullMaze();
 		
 	}// End constructor Maze
 	
@@ -76,7 +90,7 @@ public class Maze
 			{
 				
 				// Need to initialize every element in array to a new node
-				maze[row][col] = new Node(row, col, '0');
+				maze[row][col] = new Node(row, col, '0', "Hedge");
 				
 				// Set nodes in maze to be hedges
 				//maze[row][col].setElement('0');
@@ -139,32 +153,57 @@ public class Maze
 	private void insertGoalNode()
 	{
 		
-		// randomly generate number and make sure it's equal  to a space
+		// randomly generate number and make sure it's equal to a space
 		// then insert into maze
+		//maze[10][10].setElement('G');
+		//maze[10][10].setGoalNode(true);
+		//maze[10][10] = new Node(10, 10, 'G', "Goal Node");
 		
-		maze[10][10].setElement('G');
-		maze[10][10].setGoalNode(true);
+		// ====================  NOTE  ====================
+		//       Don't have goal node equal to 7,7
+		//     randomly gives out of bounds exception 
+		// ================================================
+		
+		maze[10][10] = new Node(10, 10, 'G', "Goal Node");
 		
 	}
 	
-	/*private void insertPlayer()
+	/*private void addPlayer(int row, int col)
 	{
 		
-		playerStart = new Node();
-		setPlayerStart(playerStart);
+		try 
+		{
+			player = new Player(row, col, '5', maze, "Spartan");
+			maze[row][col] = player;
+			
+		} catch (Exception e1)
+		{
+			e1.printStackTrace();
+		}
 		
-	}*/
+		player.playerTraverse();
+		
+	}// End method addPlayer*/
 	
 	// Add items and spiders to maze
 	// Random elements are selected and if they are hedges 
 	// then get replaced with the item or spider
-	private void addFeature(char feature, char replace, int number, String name) // Could pass in name or enum then use that as case statement in spider class
+	private void addFeature(char feature, char replace, int number, String name) throws Exception // Could pass in name or enum then use that as case statement in spider class
 	{
+		
 		int counter = 0;
 		
+		// Add Player
+		/*if(name.equals("Spartan"))
+		{
+			// Hard code position of Spartan for now
+			maze[5][5] = new Player(5, 5, '5', maze, name);
+		}*/
+		
+		// Add items and spiders
 		while (counter < Num_Of_Enemies)
 		{
-		
+			
 			// Generate random number and check that element
 			int row = (int) (maze.length * Math.random());
 			int col = (int) (maze[0].length * Math.random());
@@ -173,25 +212,27 @@ public class Maze
 			if (maze[row][col].getElement() == replace)
 			{	
 				
-				/*if(row % 2 == 0)
+				if(feature <= '\u0034')
 				{
-					// put a spider or item in that element
-					maze[row][col].setElement(feature);
-					maze[row][col] = new Spider(row, col, 'B', maze, null);
+					
+					maze[row][col] = new Node(row, col, feature, name);
 					
 				}
-				else{
-					
-					// put a spider or item in that element
-					maze[row][col].setElement(feature);
-					maze[row][col] = new Spider(row, col, 'K', maze, null);
-					
-				}*/
+				else if(feature == '5')
+				{
+					// Hard code position of Spartan for now
+					maze[5][5] = new Player(5, 5, '5', maze, name);
+				}
 				
-				if(feature >= '\u0036')
+				else if(feature >= '\u0036')// If it's a Spider (>= 6)
 				{
 					
-					maze[row][col] = new Spider(row, col, feature, maze, null, (name + counter));// Unique spider name
+					// ====================================  NOTE  =====================================
+					// Each node is being filled by a spider BUT spiders are not searching for goal node
+					// This may be due to each spider being put into a new BruteForceTraverser meaning 
+					// they could be navigating in their own maze and not all in the same maze
+					// =================================================================================
+					maze[row][col] = new Spider(row, col, feature, maze, null, (name + "_" + counter));// Unique spider name
 					
 					//maze[row][col].setElement(feature); // Old code
 				}
@@ -205,7 +246,7 @@ public class Maze
 	}// End method addFeature
 	
 	// Print out the entire maze
-	/*private void printFullMaze()
+	private void printFullMaze()
 	{
 		
 		// Loop through the whole array
@@ -225,7 +266,7 @@ public class Maze
 		}// End outer for
 		
 	}// End method printFullMaze
-*/	
+	
 	// Get node from maze
 	public char get(int row, int col)
 	{
@@ -257,17 +298,5 @@ public class Maze
 	public void setMaze(Node[][] maze) {
 		this.maze = maze;
 	}
-
-	/*public Node getPlayerStart()
-	{
-		return playerStart;
-	}
-
-	public void setPlayerStart(Node playerStart)
-	{
-		this.playerStart = playerStart;
-		this.maze[5][5].setElement('5');
-		this.maze[5][5] = this.playerStart;
-	}*/
 	
 }// End class Maze

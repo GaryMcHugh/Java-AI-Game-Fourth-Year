@@ -36,11 +36,12 @@ public class Node
 		this.col = col;
 	}
 	
-	public Node(int row, int col, char element)
+	public Node(int row, int col, char element, String name)
 	{
 		this.row = row;
 		this.col = col;
 		this.element = element;
+		this.name = name;
 	}
 	
 	// ==========  Getters / Setters  ==========
@@ -106,6 +107,12 @@ public class Node
 		return (Node[]) children.toArray(new Node[children.size()]);
 	}
 	
+	// ======================================
+	// DETERMINES WHAT THE SPARTAN WILL AVOID
+	// ======================================
+	//   If spartan is to avoid spiders that
+	//      behavior must be set here
+	// ======================================
 	public Node[] adjacentNodes(Node[][] maze)
 	{
 		

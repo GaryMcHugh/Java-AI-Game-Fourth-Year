@@ -9,35 +9,31 @@ public class BruteForceTraversator implements Traversator
 {
 	
 	private boolean dfs = false;
-	private Player player;
-	private Spider spider;
 	
 	// Pass in player (Will need an initialized player)
-	public BruteForceTraversator(boolean depthFirst, Player player) throws Exception
+	public BruteForceTraversator(boolean depthFirst) throws Exception
 	{
 		this.dfs = depthFirst;
-		this.player = player;
+		
+		//System.out.println(player.getRow() + " " + player.getCol() + " " + player.getElement());
 		
 	}
 	
-	public BruteForceTraversator(boolean depthFirst, Spider spider) throws Exception
+	/*public BruteForceTraversator(boolean depthFirst, Spider spider) throws Exception
 	{
 		this.dfs = depthFirst;
 		this.spider = spider;
 		
 		
-	}
+	}*/
 	
 	// node in this case is the starting position
 	// Its the place in the array
 	public void traverse(Node[][] maze, Node node)
 	{
 		
-		//System.out.println("Node Stats: " + node.getRow() + " " + node.getCol() + " " + node.getElement());
-		
         long time = System.currentTimeMillis();
     	int visitCount = 0;
-    	//int [] position = new int[2];
     	
 		Deque<Node> queue = new LinkedList<Node>();
 		
@@ -55,12 +51,11 @@ public class BruteForceTraversator implements Traversator
 			
 			visitCount++;
 			
-			//System.out.println("Spider Node Path: " + node.getElement() + " " + node.getRow() + " " + node.getCol() + " " + node.getElement());
 			System.out.println(node.getName() + " Path " + node.getRow() + " " + node.getCol() + " " + node.getElement());
 			
 			// ======================  Updates character in maze  ======================
-			player.setRow(node.getRow());
-			player.setCol(node.getCol());
+			//player.setRow(node.getRow());
+			//player.setCol(node.getCol());
 			
 			//spider.setRow(node.getRow());
 			//spider.setCol(node.getCol());
@@ -71,7 +66,7 @@ public class BruteForceTraversator implements Traversator
 		        time = System.currentTimeMillis() - time; //Stop the clock
 		        
 		        //TraversatorStats.printStats(node, time, visitCount);
-		        System.out.println("Found goal node at " +  node.getRow() + " " + node.getCol() + " " + node.getElement() + node.isVisited());
+		        System.out.println("Found goal node at " +  node.getRow() + " " + node.getCol() + " " + node.getElement() + " "+  node.isVisited());
 		        
 				break;
 				
@@ -93,6 +88,8 @@ public class BruteForceTraversator implements Traversator
 			Node[] children = node.adjacentNodes(maze);
 			
 			//System.out.println("Children: " + children[0].getRow() + " " + children[0].getCol());
+			
+			//System.out.println(node.getName() + " Path " + node.getRow() + " " + node.getCol() + " " + node.getElement());
 			
 			for (int i = 0; i < children.length; i++)
 			{

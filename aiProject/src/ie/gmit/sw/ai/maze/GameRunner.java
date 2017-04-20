@@ -55,9 +55,10 @@ public class GameRunner implements KeyListener
 	public GameRunner() throws Exception
 	{
 		
+		System.out.println("Maze being initalized: In GameRunner Constructor\n");
 		// Initialize size of maze
 		maze = new Maze(MAZE_DIMENSION);
-		
+	
 		// Pass a copy of the initialized maze into the game view 
 		view = new GameView(maze);
 		
@@ -67,7 +68,7 @@ public class GameRunner implements KeyListener
     	// Position player in the maze
 	    // Initialize node to starting position
 	    placePlayer();
-    	
+	    
 		//printFullMaze();
     	
     	// Sets size of the game view
@@ -76,19 +77,33 @@ public class GameRunner implements KeyListener
     	// Builds the window for the game view
     	buildWindow();
     	
+    	// ========================================================================
+    	// 						Player Searches For Goal Node
+    	// ========================================================================
+    	
+    	// ************************************************************************
+    	// 								VERY IMPORTANT 
+    	// ************************************************************************
+    	// Spartan does not car about spiders. He treats them like normal space and
+    	// goes straight through them. He only changes direction when he meets a 
+    	// 								HEDGE
+    	// ************************************************************************
     	// Player node 
-    	player = new Player(currentRow, currentCol, '5', maze.getMaze());
-    	//spider = new Spider(currentRow + 10, currentCol + 10, '6', maze.getMaze(), player);
-    	
-    	//view.setPlayer(player);
-    	
-		//t = new BruteForceTraversator(true, player);
-		//spiderT = new BruteForceTraversator(true, spider);
+    	/*player = new Player(currentRow, currentCol, '5', maze.getMaze(), "Spartan");
+    	System.out.println("Player name initialized: " + player.getName() + "\n" );
+		t = new BruteForceTraversator(true);*/
 		
-		//spiderT.traverse(maze.getMaze(), spider);
+		//printFullMaze();
+		
 		//t.traverse(maze.getMaze(), player);
+	
+		//printFullMaze();
 		
-    		
+		//spider = new Spider(currentRow + 10, currentCol + 10, '6', maze.getMaze(), player);
+    	//view.setPlayer(player);
+		//spiderT = new BruteForceTraversator(true, spider);
+		//spiderT.traverse(maze.getMaze(), spider);
+				
 	}// End constructor GameRunner
 	
 	private Sprite[] getSprites() throws Exception

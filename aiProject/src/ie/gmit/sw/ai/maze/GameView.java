@@ -121,6 +121,7 @@ public class GameView extends JPanel //implements ActionListener
         		else
         		{
         			g2.drawImage(sprites[imageIndex].getNext(), x1, y1, null);
+        			
         		}
         	}
         }

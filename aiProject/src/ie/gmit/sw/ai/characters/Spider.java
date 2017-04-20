@@ -18,13 +18,15 @@ public class Spider extends Node
 
 	public Spider(int row, int col, char element, Node[][] maze, Player player, String name) 
 	{
-		super(row, col, element);
+		super(row, col, element, name);
 		
 		this.maze = maze;
 		this.player = player;
 		this.name = name;
 		
-		executor.submit(() -> {
+		//System.out.println("Player Constructor" + " Maze: " + maze);
+		
+		/*executor.submit(() -> {
 			
 			
 			while(true)
@@ -32,14 +34,16 @@ public class Spider extends Node
 				
 				//System.out.println(row + " " + col);
 				//Traversator t = new IDDFSTraversator();
-				Traversator t = new BruteForceTraversator(true, player);
+				
+				Traversator t = new BruteForceTraversator(true);
+				
 				//System.out.println("Spider");
 				t.traverse(maze, maze[row][col]);
 				
 			}// End while
 			
 			
-		});// End executor
+		});// End executor*/
 		
 	}// End constructor Spider
 	

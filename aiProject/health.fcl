@@ -1,6 +1,7 @@
 FUNCTION_BLOCK Project
 	VAR_INPUT
 		health : REAL;
+		weapon : REAL;
 	END_VAR
 	
 	VAR_OUTPUT
@@ -9,8 +10,14 @@ FUNCTION_BLOCK Project
 	
 	FUZZIFY health
 	    TERM low := (0,1) (20, 1) (35, 0) ; 
-	    TERM sound := trian 30 50 75;
+	    TERM moderate := trian 30 50 75;
 	    TERM high := (70, 0) (85, 1) (100, 1) ;
+	END_FUZZIFY
+	
+	FUZZIFY weapon
+	    TERM none := (0,0) (0.1, 1) (0.2, 0) ; 
+	    TERM one := trian 0.2 0.5 0.7;
+	    TERM two := (0.7, 0) (0.85, 1) (1, 1) ;
 	END_FUZZIFY
 	
 	DEFUZZIFY risk
@@ -24,9 +31,13 @@ FUNCTION_BLOCK Project
 		ACT : MIN;
 		ACCU : MAX;
 	
-		RULE 1 : IF health is high THEN risk is low;
-		RULE 2 : IF health is sound THEN risk is normal; 
-		RULE 3 : IF health is low THEN risk is high;
+		RULE 1 : IF health is high AND weapon is two OR weapon is one THEN risk is low;
+		RULE 2 : IF health is high AND weapon is none THEN risk is normal;
+		RULE 3 : IF health is moderate AND weapon is none THEN risk is high;
+		RULE 4 : IF health is moderate AND weapon is one THEN risk is normal; 
+		RULE 5 : IF health is low THEN risk is high;
+		RULE 6 : IF health is low AND weapon is none THEN risk is high;
+		RULE 7 : IF health is low AND weapon is two THEN risk is normal;
 	END_RULEBLOCK
 	
 END_FUNCTION_BLOCK

@@ -37,7 +37,7 @@ FUNCTION_BLOCK Project
 		RULE 4 : IF health is moderate AND weapon is one THEN risk is normal; 
 		RULE 5 : IF health is low THEN risk is high;
 		RULE 6 : IF health is low AND weapon is none THEN risk is high;
-		RULE 6 : IF health is low AND weapon is two THEN risk is normal;
+		RULE 7 : IF health is low AND weapon is two THEN risk is normal;
 	END_RULEBLOCK
 	
 END_FUNCTION_BLOCK

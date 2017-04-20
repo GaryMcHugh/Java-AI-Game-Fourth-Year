@@ -3,6 +3,12 @@ package ie.gmit.sw.ai.nn;
 import ie.gmit.sw.ai.nn.activator.Activator;
 
 public class GameRunner {
+	/*
+	    1 Health (2 is Good Health, 1 is Okay Health, 0 is Needs Health)
+	    2 Sword (1 is Yes, 0 is No)
+	    3 Bomb (1 is Yes, 0 is No)
+	    4 Hydrogen Bomb (1 is Yes, 0 is No)
+	*/
 	private double[][] data = { // Health, Sword, Gun, Enemies
 			{ 2, 0, 0, 0 }, { 2, 0, 0, 1 }, { 2, 0, 1, 1 }, { 2, 0, 1, 2 }, { 2, 1, 0, 2 }, { 2, 1, 0, 1 },
 			{ 1, 0, 0, 0 }, { 1, 0, 0, 1 }, { 1, 0, 1, 1 }, { 1, 0, 1, 2 }, { 1, 1, 0, 2 }, { 1, 1, 0, 1 },
@@ -31,8 +37,8 @@ public class GameRunner {
 		System.out.println("run away!!");
 	}
 
-	public void action(double health, double sword, double gun, double enemies) throws Exception {
-		double[] params = {health, sword, gun, enemies};
+	public void action(double health, double sword, double bomb, double hBomb) throws Exception {
+		double[] params = {health, sword, bomb, hBomb};
 		
 		NeuralNetwork nn = new NeuralNetwork(Activator.ActivationFunction.Sigmoid, 4, 3, 4);
 
@@ -44,7 +50,8 @@ public class GameRunner {
 		for (double val : result){
 			System.out.println(val);
 		}
-		System.out.println("==> " + (Utils.getMaxIndex(result) + 1));
+		
+		//System.out.println("==> " + (Utils.getMaxIndex(result) + 1));
 
 		//we want the output with the highest value
 		int choice = (Utils.getMaxIndex(result) + 1);
@@ -65,12 +72,23 @@ public class GameRunner {
 	}
 
 	public static void main(String[] args) throws Exception {
-		double health = Double.parseDouble(args[0]);
-		double sword = Double.parseDouble(args[1]);
-		double gun = Double.parseDouble(args[2]);
-		double enemies = Double.parseDouble(args[3]);
-		
-		//run, run configurations, arguements tab, fill in arguements, apply and run
-		new GameRunner().action(health, sword, gun, enemies);
+		Decision combatNet = new Decision();
+
+        combatNet.action(0.5, 1, 1, 0.5); // attack
+        combatNet.action(0, 1, 1, 0);
+        combatNet.action(0, 1, 1, 0);
+        combatNet.action(0, 1, 1, 0);
+        combatNet.action(0.5, 0, 0, 0.5); // panic
+        combatNet.action(0.5, 0, 0, 0.5);
+        combatNet.action(0.5, 0, 0, 0.5);
+        combatNet.action(0.5, 0, 0, 0.5);
+        combatNet.action(0, 0, 1, 1);
+        combatNet.action(0, 0, 1, 1); // run
+        combatNet.action(0, 0, 1, 1);
+        combatNet.action(0, 0, 1, 1);
+        combatNet.action(0, 1, 0, 0); // heal
+        combatNet.action(0, 1, 0, 0);
+        combatNet.action(0, 1, 0, 0);
+        combatNet.action(0, 1, 0, 0);
 	}
 }

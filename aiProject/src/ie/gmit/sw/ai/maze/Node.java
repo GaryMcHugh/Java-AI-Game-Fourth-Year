@@ -42,7 +42,16 @@ public class Node
 		this.col = col;
 		this.element = element;
 		this.name = name;
-	}
+		
+		// If it's the goal node set the boolean to true
+		if(name.equals("Goal Node"))
+		{
+			
+			setGoalNode(true);
+			
+		}
+		
+	}// End constructor Node
 	
 	// ==========  Getters / Setters  ==========
 	

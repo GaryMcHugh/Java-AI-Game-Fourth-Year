@@ -63,13 +63,13 @@ public class Maze
 		// Place goal node for player to search for
 		insertGoalNode();
 		
-		addFeature('5', '0', featureNumber, "Spartan");  //5 is the Spartan, 0 is a hedge
+		//addFeature('5', '0', featureNumber, "Spartan");  //5 is the Spartan, 0 is a hedge
 		
 		// =================  NOTE  =================
 		// Player starts searching immediately after 
 		//    the node is set to a place in maze 
 		// ==========================================
-		//addPlayer(5, 5);
+		addPlayer(5, 5);
 		
 		
 		// ==========  FOR TESTING PURPOSES  ==========
@@ -165,25 +165,17 @@ public class Maze
 		// ================================================
 		
 		maze[10][10] = new Node(10, 10, 'G', "Goal Node");
+		maze[10][10].setGoalNode(true);
 		
 	}
 	
-	/*private void addPlayer(int row, int col)
+	private void addPlayer(int row, int col) throws Exception
 	{
 		
-		try 
-		{
-			player = new Player(row, col, '5', maze, "Spartan");
-			maze[row][col] = player;
-			
-		} catch (Exception e1)
-		{
-			e1.printStackTrace();
-		}
+			// Hard code position of Spartan for now
+			maze[5][5] = new Player(5, 5, '5', maze, "Spartan");
 		
-		player.playerTraverse();
-		
-	}// End method addPlayer*/
+	}// End method addPlayer
 	
 	// Add items and spiders to maze
 	// Random elements are selected and if they are hedges 
@@ -218,12 +210,6 @@ public class Maze
 					maze[row][col] = new Node(row, col, feature, name);
 					
 				}
-				else if(feature == '5')
-				{
-					// Hard code position of Spartan for now
-					maze[5][5] = new Player(5, 5, '5', maze, name);
-				}
-				
 				else if(feature >= '\u0036')// If it's a Spider (>= 6)
 				{
 					

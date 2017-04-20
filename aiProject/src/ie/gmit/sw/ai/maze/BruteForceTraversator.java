@@ -66,7 +66,7 @@ public class BruteForceTraversator implements Traversator
 		        time = System.currentTimeMillis() - time; //Stop the clock
 		        
 		        //TraversatorStats.printStats(node, time, visitCount);
-		        System.out.println("Found goal node at " +  node.getRow() + " " + node.getCol() + " " + node.getElement() + " "+  node.isVisited());
+		        System.out.println("Found goal node at " +  node.getRow() + " " + node.getCol() + " " + node.getElement() + " " +  node.isVisited());
 		        
 				break;
 				

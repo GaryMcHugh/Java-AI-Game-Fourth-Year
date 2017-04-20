@@ -35,8 +35,10 @@ public class IDDFSTraversator implements Traversator
 		if (!keepRunning || depth > limit) return;		
 		node.setVisited(true);	
 		visitCount++;
+		System.out.println(node.getName() + " Path " + node.getRow() + " " + node.getCol() + " " + node.getElement());
 		if (node.isGoalNode()){
 	        time = System.currentTimeMillis() - time; //Stop the clock
+	        System.out.println("Found goal node at " +  node.getRow() + " " + node.getCol() + " " + node.getElement() + " " +  node.isVisited());
 	        //TraversatorStats.printStats(node, time, visitCount);
 	        keepRunning = false;
 			return;
@@ -48,7 +50,8 @@ public class IDDFSTraversator implements Traversator
 			e.printStackTrace();
 		}
 		
-		Node[] children = node.children(maze);
+		//Node[] children = node.children(maze);
+		Node[] children = node.adjacentNodes(maze);
 		for (int i = 0; i < children.length; i++) {
 			if (children[i] != null && !children[i].isVisited()){
 				children[i].setParent(node);

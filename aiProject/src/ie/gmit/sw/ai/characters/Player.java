@@ -1,8 +1,6 @@
 package ie.gmit.sw.ai.characters;
 
-import ie.gmit.sw.ai.maze.BruteForceTraversator;
-import ie.gmit.sw.ai.maze.Node;
-import ie.gmit.sw.ai.maze.Traversator;
+import ie.gmit.sw.ai.maze.*;
 
 
 /*
@@ -28,7 +26,9 @@ public class Player extends Node
 		this.row = currentRow;
 		this.col = currentCol;
 		
-		t = new BruteForceTraversator(true);
+		//t = new BruteForceTraversator(true);
+		//t.traverse(maze, maze[row][col]);
+		t = new IDDFSTraversator();
 		t.traverse(maze, maze[row][col]);
 		
 		// When traversing through maze the spartan never actually swaps into a new cell

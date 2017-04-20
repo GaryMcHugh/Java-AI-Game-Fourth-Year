@@ -16,12 +16,12 @@ public class RecursiveDFSTraversator implements Traversator
 	private void dfs(Node node){
 		if (!keepRunning) return;
 		
-		node.setVisited(true);	
+		node.setIsVisited(true);	
 		visitCount++;
 		System.out.println(node.getName() + " Path " + node.getRow() + " " + node.getCol() + " " + node.getElement());
 		if (node.isGoalNode()){
 	        time = System.currentTimeMillis() - time; //Stop the clock
-	        System.out.println("Found goal node at " +  node.getRow() + " " + node.getCol() + " " + node.getElement() + " " +  node.isVisited());
+	        System.out.println("Found goal node at " +  node.getRow() + " " + node.getCol() + " " + node.getElement() + " " +  node.getIsVisited());
 	        //TraversatorStats.printStats(node, time, visitCount);
 	        keepRunning = false;
 			return;
@@ -36,7 +36,7 @@ public class RecursiveDFSTraversator implements Traversator
 		//Node[] children = node.children(maze);
 		Node[] children = node.adjacentNodes(maze);
 		for (int i = 0; i < children.length; i++) {
-			if (children[i] != null && !children[i].isVisited()){
+			if (children[i] != null && !children[i].getIsVisited()){
 				children[i].setParent(node);
 				dfs(children[i]);
 			}

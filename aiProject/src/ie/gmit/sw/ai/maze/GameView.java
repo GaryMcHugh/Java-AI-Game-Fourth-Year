@@ -4,11 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JPanel;
-import javax.swing.Timer;
-
 import ie.gmit.sw.ai.characters.Player;
 
 
@@ -17,6 +13,7 @@ import ie.gmit.sw.ai.characters.Player;
  *  This class paints the game to the screen
  * 
  */
+
 public class GameView extends JPanel //implements ActionListener
 {
 

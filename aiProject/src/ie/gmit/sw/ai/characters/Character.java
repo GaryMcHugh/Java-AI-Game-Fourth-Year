@@ -2,6 +2,12 @@ package ie.gmit.sw.ai.characters;
 
 import ie.gmit.sw.ai.maze.Maze;
 
+/*
+ * 
+ *  Class is no longer in use
+ * 
+ */
+
 public abstract class Character
 {
 

@@ -50,7 +50,7 @@ public class BruteForceTraversator implements Traversator
 			node = queue.poll();
 			
 			// Set current node to true
-			node.setVisited(true);
+			node.setIsVisited(true);
 			
 			// Swap spartan position here
 			// node is new node
@@ -77,7 +77,7 @@ public class BruteForceTraversator implements Traversator
 			
 			visitCount++;
 			
-			System.out.println(node.getName() + " Path " + node.getRow() + " " + node.getCol() + " " + node.getElement());
+			System.out.println(node.getName() + " Path " + node.getRow() + " " + node.getCol() + " " + node.getElement() + " " + node.getWeaponLevel());
 			  
 			// ======================  Updates character in maze  ======================
 			//player.setRow(node.getRow());
@@ -92,7 +92,7 @@ public class BruteForceTraversator implements Traversator
 		        time = System.currentTimeMillis() - time; //Stop the clock
 		        
 		        //TraversatorStats.printStats(node, time, visitCount);
-		        System.out.println("Found goal node at " +  node.getRow() + " " + node.getCol() + " " + node.getElement() + " " +  node.isVisited());
+		        System.out.println("Found goal node at " +  node.getRow() + " " + node.getCol() + " " + node.getElement() + " " +  node.getIsVisited());
 		        
 				break;
 				
@@ -121,8 +121,16 @@ public class BruteForceTraversator implements Traversator
 			{
 				
 				// If child is not null and has not been visited
-				if (children[i] != null && !children[i].isVisited())
+				if (children[i] != null && !children[i].getIsVisited())
 				{
+					
+					// If Spartan is beside a sword 
+					// set in to 1, which means he has
+					// the sword
+					if(children[i].getElement() == '\u0031' )
+					{
+						node.setWeaponLevel(1);
+					}
 					
 					// children[i] is a node
 					children[i].setParent(node);

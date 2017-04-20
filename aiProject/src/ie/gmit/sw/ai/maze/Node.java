@@ -1,7 +1,5 @@
 package ie.gmit.sw.ai.maze;
 
-import ie.gmit.sw.ai.maze.Node.Direction;
-
 /*
  * 
  *  Nodes are used within each space in the maze. They store information
@@ -12,30 +10,35 @@ import ie.gmit.sw.ai.maze.Node.Direction;
 public class Node 
 {
 	
-	public enum Direction {North, South, East, West};
+	// ============  Variables  ============
 	
-	// element will represent the image in the 
-	// form of a character
-	private char element;
-	private boolean isGoal;
-	private boolean visited = false;
-	private Node parent;
-	private Node player;
-	private Direction[] paths = null;
+	// Node information
 	private String name;
 	
 	// Track current location 
 	private int row;
 	private int col;
 	
-	public Node(){}
-
-	public Node(int row, int col)
-	{
-		this.row = row;
-		this.col = col;
-	}
+	// Sprite
+	private char element;
 	
+	private boolean isGoal;
+	private boolean isVisited = false;
+	
+	private Node parent;
+	private Node player;
+	
+	
+	// Player state for AI Decisions
+	private double health = 100;
+	private double weaponLevel = 0;
+	
+	// ***************  NOTE  ***************
+	// Might be good idea to have a Node as a
+	// parameter which can then initialize a
+	// type of node E.G Player or Spider
+	// 			PROB NOT THOUGH
+	// **************************************
 	public Node(int row, int col, char element, String name)
 	{
 		this.row = row;
@@ -43,70 +46,7 @@ public class Node
 		this.element = element;
 		this.name = name;
 		
-		// If it's the goal node set the boolean to true
-		if(name.equals("Goal Node"))
-		{
-			
-			setGoalNode(true);
-			
-		}
-		
 	}// End constructor Node
-	
-	// ==========  Getters / Setters  ==========
-	
-	// Get the character
-	public char getElement() 
-	{	
-		return element;	
-	}// End getElement
-
-	// Set the character
-	public void setElement(char element) 
-	{
-		this.element = element;	
-	}// End method setElement
-
-	public boolean isGoalNode() 
-	{
-		return isGoal;
-	}// End method isGoal
-
-	public void setGoalNode(boolean goal)
-	{
-		this.isGoal = goal;
-	}// End method setGoal
-
-	// ==========  Dumbass =========
-	// parameter was boolean visited
-	public void setVisited(boolean b) 
-	{
-		this.visited = b;
-	}
-
-	public boolean isVisited() {
-		return visited;
-	}
-	
-	public boolean hasDirection(Direction direction){	
-		for (int i = 0; i < paths.length; i++) {
-			if (paths[i] == direction) return true;
-		}
-		return false;
-	}
-	
-	public Node[] children(Node[][] maze)
-	{
-		
-		java.util.List<Node> children = new java.util.ArrayList<Node>();
-				
-		if (row > 0 && maze[row - 1][col].hasDirection(Direction.South)) children.add(maze[row - 1][col]); //Add North
-		if (row < maze.length - 1 && maze[row + 1][col].hasDirection(Direction.North)) children.add(maze[row + 1][col]); //Add South
-		if (col > 0 && maze[row][col - 1].hasDirection(Direction.East)) children.add(maze[row][col - 1]); //Add West
-		if (col < maze[row].length - 1 && maze[row][col + 1].hasDirection(Direction.West)) children.add(maze[row][col + 1]); //Add East
-		
-		return (Node[]) children.toArray(new Node[children.size()]);
-	}
 	
 	// ======================================
 	// DETERMINES WHAT THE SPARTAN WILL AVOID
@@ -127,58 +67,80 @@ public class Node
 			// If it isn't a hedge
 			if(maze[row -1][col].getElement() != '0')
 			{
-				
-				// Add this node to list
+				// Add north node to list
 				adjacents.add(maze[row - 1][col]);	
-				//System.out.println("Row: " + (row -1) + "\n" + "Col: " + col);
-				
 			}
 			
-		}//adjacents.add(maze[row - 1][col]); //Add North
+			// If it's a sword
+			if(maze[row -1][col].getElement() != '\u0031'){}
+			
+		}
 		
+		// If there is a south path
 		if (row < maze.length - 1) 
 		{
 			
 			//System.out.println("Row: " + row + "\n" +"Maze Length: " +  (maze.length - 1));
 			if(maze[row + 1][col].getElement() != '0')
 			{
+				// Add south node to list
 				adjacents.add(maze[row + 1][col]);
 			}
 			
 		}//adjacents.add(maze[row + 1][col]); //Add South
 		
+		// If there is a west path 
 		if (col > 0)
 		{
 			if(maze[row][col - 1].getElement() != '0')
 			{
+				// Add west node to list
 				adjacents.add(maze[row][col - 1]);
 			}
 			
-		}//adjacents.add(maze[row][col - 1]); //Add West
+		}
 		
+		// If there is an east path
 		if (col < maze[row].length - 1)
 		{
 			
 			if(maze[row][col + 1].getElement() != '0')
 			{
+				// Add east node to list
 				adjacents.add(maze[row][col + 1]);
 			}
 			
-		}//adjacents.add(maze[row][col + 1]); //Add East*/
+		}
 		
 		return (Node[]) adjacents.toArray(new Node[adjacents.size()]);
 	}
 
-	public Node getPlayer() 
+	public void swapPosition(Node[][] maze, Node newPosition, Node oldPosition)
+	{	
+		
+		// If the new position is a hedge
+		if(maze[newPosition.getRow()][newPosition.getCol()].getElement() == '0' || maze[newPosition.getRow()][newPosition.getCol()].getElement() == 'G')
+		{
+			// need if to check if's the spartan who's changing the elements in the maze
+			maze[newPosition.getRow()][newPosition.getCol()].setElement('5');
+			maze[oldPosition.getRow()][oldPosition.getCol()].setElement('\u0020'); // Spartan SHOULD only be in space element, CAN be on other items ATM
+			//System.out.println("Current node " + oldPosition.getElement() + "   " + "Parent node " + newPosition.getElement());
+		}
+		
+	}
+	
+	// ===============  Getters / Setters  ===============
+	
+	public String getName() 
 	{
-		return player;
+		return name;
 	}
 
-	public void setPlayer(Node player)
+	public void setName(String name)
 	{
-		this.player = player;
+		this.name = name;
 	}
-
+	
 	public int getRow() 
 	{
 		return row;
@@ -198,15 +160,35 @@ public class Node
 	{
 		this.col = col;
 	}
-
-	public String getName() 
+	
+	public char getElement() 
+	{	
+		return element;	
+	}
+	
+	public void setElement(char element) 
 	{
-		return name;
+		this.element = element;	
 	}
 
-	public void setName(String name)
+	public boolean isGoalNode() 
 	{
-		this.name = name;
+		return isGoal;
+	}
+
+	public void setGoalNode(boolean goal)
+	{
+		this.isGoal = goal;
+	}
+	
+	public void setIsVisited(boolean isVisited) 
+	{
+		this.isVisited = isVisited;
+	}
+
+	public boolean getIsVisited() 
+	{
+		return isVisited;
 	}
 	
 	// The current node becomes the Parent node 
@@ -219,19 +201,35 @@ public class Node
 	{
 		this.parent = parent;
 	}
+	
+	public Node getPlayer() 
+	{
+		return player;
+	}
 
-	public void swapPosition(Node[][] maze, Node newPosition, Node oldPosition)
-	{	
-		
-		// If the new position is a hedge
-		if(maze[newPosition.getRow()][newPosition.getCol()].getElement() == '0' || maze[newPosition.getRow()][newPosition.getCol()].getElement() == 'G')
-		{
-			// need if to check if's the spartan who's changing the elements in the maze
-			maze[newPosition.getRow()][newPosition.getCol()].setElement('5');
-			maze[oldPosition.getRow()][oldPosition.getCol()].setElement('\u0020');
-			//System.out.println("Current node " + oldPosition.getElement() + "   " + "Parent node " + newPosition.getElement());
-		}
-		
+	public void setPlayer(Node player)
+	{
+		this.player = player;
+	}
+	
+	public double getHealth()
+	{
+		return health;
+	}
+	
+	public void setHealth(double health) 
+	{
+		this.health = health;
+	}
+
+	public double getWeaponLevel()
+	{
+		return weaponLevel;
+	}
+
+	public void setWeaponLevel(double weaponLevel) 
+	{
+		this.weaponLevel = weaponLevel;
 	}
 	
 }// End class Node

@@ -34,12 +34,12 @@ public class IDDFSTraversator implements Traversator
 	{
 		
 		if (!keepRunning || depth > limit) return;		
-		node.setVisited(true);	
+		node.setIsVisited(true);	
 		visitCount++;
 		System.out.println(node.getName() + " Path " + node.getRow() + " " + node.getCol() + " " + node.getElement());
 		if (node.isGoalNode()){
 	        time = System.currentTimeMillis() - time; //Stop the clock
-	        System.out.println("Found goal node at " +  node.getRow() + " " + node.getCol() + " " + node.getElement() + " " +  node.isVisited());
+	        System.out.println("Found goal node at " +  node.getRow() + " " + node.getCol() + " " + node.getElement() + " " +  node.getIsVisited());
 	        //TraversatorStats.printStats(node, time, visitCount);
 	        keepRunning = false;
 			return;
@@ -54,7 +54,7 @@ public class IDDFSTraversator implements Traversator
 		//Node[] children = node.children(maze);
 		Node[] children = node.adjacentNodes(maze);
 		for (int i = 0; i < children.length; i++) {
-			if (children[i] != null && !children[i].isVisited()){
+			if (children[i] != null && !children[i].getIsVisited()){
 				children[i].setParent(node);
 				dfs(children[i], depth + 1, limit);
 			}
@@ -65,7 +65,7 @@ public class IDDFSTraversator implements Traversator
 	{
 		for (int i = 0; i < maze.length; i++){
 			for (int j = 0; j < maze[i].length; j++){
-				maze[i][j].setVisited(false);
+				maze[i][j].setIsVisited(false);
 				maze[i][j].setParent(null);
 				//maze[i][j].setColor(Color.BLACK);
 			}

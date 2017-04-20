@@ -8,17 +8,11 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
 import ie.gmit.sw.ai.characters.Player;
-import ie.gmit.sw.ai.characters.Spider;
+import ie.gmit.sw.ai.fl.FuzzyLogic;
 
 /*
  * 
- *  This class will be used for starting the game
- *  
- *  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  NOTES  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- *  - Next thing to do is get the spartan to move around the maze using an algorithm 
- *  - Pass in the maze and Spartan location into one of the algorithms
- *  - Looks likely this will be done in the placePlayer method or the updateView method
- *  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ *  This class is be used for starting the game
  * 
  */
 public class GameRunner implements KeyListener
@@ -34,14 +28,10 @@ public class GameRunner implements KeyListener
 	private Maze maze;
 	private GameView view;
 	
-	private int currentRow = 5;
-	private int currentCol = 5;
+	/*private int currentRow = 5;
+	private int currentCol = 5;*/
 	
 	private Player player;
-	private Spider spider;
-		
-	 // Algorithm to use
-    private Traversator t, spiderT;
 		
 	// Main method to start the game 
 	public static void main(String[] args) throws Exception 
@@ -55,7 +45,10 @@ public class GameRunner implements KeyListener
 	public GameRunner() throws Exception
 	{
 		
+		new FuzzyLogic();
+		
 		System.out.println("Maze being initalized: In GameRunner Constructor\n");
+		
 		// Initialize size of maze
 		maze = new Maze(MAZE_DIMENSION);
 	
@@ -65,9 +58,13 @@ public class GameRunner implements KeyListener
 		Sprite[] sprites = getSprites();
     	view.setSprites(sprites);
     	
+    	
+    	// ************  NOTE  ************
+    	// Game crashes without this method
+    	// ********************************
     	// Position player in the maze
 	    // Initialize node to starting position
-	    placePlayer();
+	    //placePlayer();
 	    
 		//printFullMaze();
     	
@@ -77,32 +74,7 @@ public class GameRunner implements KeyListener
     	// Builds the window for the game view
     	buildWindow();
     	
-    	// ========================================================================
-    	// 						Player Searches For Goal Node
-    	// ========================================================================
-    	
-    	// ************************************************************************
-    	// 								VERY IMPORTANT 
-    	// ************************************************************************
-    	// Spartan does not car about spiders. He treats them like normal space and
-    	// goes straight through them. He only changes direction when he meets a 
-    	// 								HEDGE
-    	// ************************************************************************
-    	// Player node 
-    	/*player = new Player(currentRow, currentCol, '5', maze.getMaze(), "Spartan");
-    	System.out.println("Player name initialized: " + player.getName() + "\n" );
-		t = new BruteForceTraversator(true);*/
-		
 		//printFullMaze();
-		
-		//t.traverse(maze.getMaze(), player);
-	
-		//printFullMaze();
-		
-		//spider = new Spider(currentRow + 10, currentCol + 10, '6', maze.getMaze(), player);
-    	//view.setPlayer(player);
-		//spiderT = new BruteForceTraversator(true, spider);
-		//spiderT.traverse(maze.getMaze(), spider);
 				
 	}// End constructor GameRunner
 	
@@ -130,7 +102,7 @@ public class GameRunner implements KeyListener
 		return sprites;
 	}
 	
-	private void placePlayer()
+	/*private void placePlayer()
 	{   
 		// ======================  Have to set spartan in maze or he won't show up in game view ======================
 		//A Spartan warrior is at index 5
@@ -139,7 +111,7 @@ public class GameRunner implements KeyListener
     	view.setCurrentRow(currentRow);
     	view.setCurrentCol(currentCol);
     		
-	}
+	}*/
 	
 	private void buildWindow()
 	{
@@ -172,7 +144,7 @@ public class GameRunner implements KeyListener
 		view.setCurrentRow(player.getCol());
 	}
 	
-	private void printFullMaze()
+	/*private void printFullMaze()
 	{
 		
 		// Loop through the whole array
@@ -192,7 +164,7 @@ public class GameRunner implements KeyListener
 		}// End outer for
 		
 	}// End method printFullMaze
-
+*/
 	// ==========  IGNORE  ==========
 	public void keyPressed(KeyEvent e) 
 	{
@@ -215,7 +187,7 @@ public class GameRunner implements KeyListener
 		
 	}
 
-	private boolean isValidMove(int row, int col)
+	/*private boolean isValidMove(int row, int col)
 	{
 		if (row <= maze.size() - 1 && col <= maze.size() - 1 && maze.get(row, col) == ' '){
 			maze.set(currentRow, currentCol, '\u0020');
@@ -224,7 +196,7 @@ public class GameRunner implements KeyListener
 		}else{
 			return false; //Can't move
 		}
-	}
+	}*/
 	
 	public void keyReleased(KeyEvent e) {}
 

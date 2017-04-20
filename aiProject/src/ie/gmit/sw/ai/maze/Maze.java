@@ -10,10 +10,6 @@ import ie.gmit.sw.ai.characters.Player;
  * 
  */
 
-// ================================= IMPORTANT  ================================
-// **** When maze is built every node should have it's position initialized **** 
-// =============================================================================
-
 public class Maze 
 {
 	
@@ -22,8 +18,6 @@ public class Maze
 	
 	// ============  Variables  ============
 	private Node[][] maze;
-	private Player player;
-	private boolean isPlayer = false;
 	
 	// Maze will be initialized when a new instance of maze in created
 	// It takes an int which is used to set the maze size
@@ -51,7 +45,6 @@ public class Maze
 	
 		//addFeature('\u0036', '0', featureNumber, "Black");  //6 is a Black Spider, 0 is a hedge
 		
-		
 		/*addFeature('\u0037', '0', featureNumber, "Blue");   //7 is a Blue Spider, 0 is a hedge
 		addFeature('\u0038', '0', featureNumber, "Brown");  //8 is a Brown Spider, 0 is a hedge
 		addFeature('\u0039', '0', featureNumber, "Green");  //9 is a Green Spider, 0 is a hedge
@@ -59,8 +52,6 @@ public class Maze
 		addFeature('\u003B', '0', featureNumber, "Orange"); //; is a Orange Spider, 0 is a hedge
 		addFeature('\u003C', '0', featureNumber, "Red");    //< is a Red Spider, 0 is a hedge
 		addFeature('\u003D', '0', featureNumber, "Yellow"); //= is a Yellow Spider, 0 is a hedge*/
-		
-		//printFullMaze();
 		
 		// Place goal node for player to search for
 		insertGoalNode();
@@ -73,12 +64,13 @@ public class Maze
 		// ==========================================
 		addPlayer(5, 5);
 		
-		
 		// ==========  FOR TESTING PURPOSES  ==========
 		// Print out the entire maze including borders
 		printFullMaze();
 		
 	}// End constructor Maze
+	
+	// ====================  Helper Methods  ====================
 	
 	// Create the whole maze first filling it with only hedges
 	private void init()
@@ -155,12 +147,6 @@ public class Maze
 	private void insertGoalNode()
 	{
 		
-		// randomly generate number and make sure it's equal to a space
-		// then insert into maze
-		//maze[10][10].setElement('G');
-		//maze[10][10].setGoalNode(true);
-		//maze[10][10] = new Node(10, 10, 'G', "Goal Node");
-		
 		// ====================  NOTE  ====================
 		//       Don't have goal node equal to 7,7
 		//     randomly gives out of bounds exception 
@@ -168,6 +154,7 @@ public class Maze
 		
 		maze[10][10] = new Node(10, 10, 'G', "Goal Node");
 		maze[10][10].setGoalNode(true);
+		//maze[10][10].setElement('G');
 		
 	}
 	
@@ -182,17 +169,10 @@ public class Maze
 	// Add items and spiders to maze
 	// Random elements are selected and if they are hedges 
 	// then get replaced with the item or spider
-	private void addFeature(char feature, char replace, int number, String name) throws Exception // Could pass in name or enum then use that as case statement in spider class
+	private void addFeature(char feature, char replace, int number, String name) throws Exception 
 	{
 		
 		int counter = 0;
-		
-		// Add Player
-		/*if(name.equals("Spartan"))
-		{
-			// Hard code position of Spartan for now
-			maze[5][5] = new Player(5, 5, '5', maze, name);
-		}*/
 		
 		// Add items and spiders
 		while (counter < Num_Of_Enemies)
@@ -215,11 +195,6 @@ public class Maze
 				else if(feature >= '\u0036')// If it's a Spider (>= 6)
 				{
 					
-					// ====================================  NOTE  =====================================
-					// Each node is being filled by a spider BUT spiders are not searching for goal node
-					// This may be due to each spider being put into a new BruteForceTraverser meaning 
-					// they could be navigating in their own maze and not all in the same maze
-					// =================================================================================
 					maze[row][col] = new Spider(row, col, feature, maze, null, (name + "_" + counter));// Unique spider name
 					
 					//maze[row][col].setElement(feature); // Old code
@@ -254,13 +229,22 @@ public class Maze
 		}// End outer for
 		
 	}// End method printFullMaze
+
+	// ====================  Getters / Setters  ====================
 	
-	// Get node from maze
+	public Node[][] getMaze()
+	{
+		return maze;
+	}
+
+	public void setMaze(Node[][] maze)
+	{
+		this.maze = maze;
+	}
+	
+	// Get element from specified node from maze
 	public char get(int row, int col)
 	{
-		
-		//System.out.println("Maze position" + this.maze[row][col].getElement());
-		// Return specific node
 		return this.maze[row][col].getElement();
 		
 	}// End method get
@@ -268,23 +252,12 @@ public class Maze
 	public void set(int row, int col, char c) 
 	{
 		this.maze[row][col].setElement(c);
-		
 	}
 	
-	// Returns the size of the maze
 	public int size()
 	{
-		
 		return this.maze.length;
 		
 	}// End method size
-
-	public Node[][] getMaze() {
-		return maze;
-	}
-
-	public void setMaze(Node[][] maze) {
-		this.maze = maze;
-	}
 	
 }// End class Maze

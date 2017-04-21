@@ -45,9 +45,10 @@ The application can be downloaded from GitHub using the above link. You will be 
 
 __if you want to run this in your own IDE follow these steps:__
 1. Download a zip file of this project using the 'Clone or download' button above and unzip it __or__ download [Git](https://git-scm.com/downloads) and execute the following command in the Git Bash Console:
-	```
-	git clone https://github.com/chris2020/Java-AI-Game-Fourth-Year.git
-	```
+
+ ```
+    git clone https://github.com/chris2020/Java-AI-Game-Fourth-Year.git
+ ```
   
   2. Open the downloaded file in your preferred IDE or import the project into your IDE.
   3. Go to the GameRunner.Java file in the __ie.gmit.sw.ai.maze__ package.
@@ -56,7 +57,18 @@ __if you want to run this in your own IDE follow these steps:__
 ### AI Search Algorithms
 The AI Search Algorithms are used to make the characters traverse the maze, there are various algorithms to do this. We first assigned the Brute Force Algorithm to the Spartan and manually set a goal node for him to reach. This was to ensure that we could successfully traverse the maze. Once we had this working we applied it to the Sprites. We used an Executor Service to thread the Sprites, allowing multiple Sprites to search for the goal node at the same time. We assigned different algorithms to different Sprites.
 
-__table here with algorithms on coloured spider__
+|Character|Search Algorithm|
+|---|---|
+|Spartan|<search algorithm here>|
+|Black Spider|<search algorithm here>|
+|Blue Spider|<search algorithm here>|
+|Brown Spider|<search algorithm here>|
+|Green Spider|<search algorithm here>|
+|Grey Spider|<search algorithm here>|
+|Orange Spider|<search algorithm here>|
+|Red Spider|<search algorithm here>|
+|Yellow Spider|<search algorithm here>|
+
 ### Fuzzy Logic
 |Input Variables|Description|
 |---|---|

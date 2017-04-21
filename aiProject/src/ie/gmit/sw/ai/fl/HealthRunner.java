@@ -9,9 +9,9 @@ public class HealthRunner {
 	public static void main(String[] args) {
 		FIS fis = FIS.load("health.fcl", true);
 		FunctionBlock fb = fis.getFunctionBlock("Project");
-		//JFuzzyChart.get().chart(fb);
+		JFuzzyChart.get().chart(fb);
 		fis.setVariable("health", 10);
-		fis.setVariable("weapon", 0.9);
+		fis.setVariable("weapon", 0);
 		fis.evaluate();
 
 		Variable tip = fb.getVariable("risk");

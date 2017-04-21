@@ -10,14 +10,14 @@ FUNCTION_BLOCK Project
 	
 	FUZZIFY health
 	    TERM low := (0,1) (20, 1) (35, 0) ; 
-	    TERM moderate := trian 30 50 75;
+	    TERM moderate := gauss 50 8;
 	    TERM high := (70, 0) (85, 1) (100, 1) ;
 	END_FUZZIFY
 	
 	FUZZIFY weapon
-	    TERM none := (0,0) (0.1, 1) (0.2, 0) ; 
-	    TERM one := trian 0.2 0.5 0.7;
-	    TERM two := (0.7, 0) (0.85, 1) (1, 1) ;
+	    TERM none := (0, 1) (1, 0) ; 
+	    TERM one := trape 1 1.3 1.6 2;
+	    TERM two := (2, 0) (2.5, 1) (3, 1) ;
 	END_FUZZIFY
 	
 	DEFUZZIFY risk

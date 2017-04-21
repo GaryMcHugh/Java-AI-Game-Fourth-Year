@@ -69,15 +69,11 @@ The AI Search Algorithms are used to make the characters traverse the maze, ther
 
 |Character|Search Algorithm|
 |---|---|
-|Spartan|<search algorithm here>|
-|Black Spider|<search algorithm here>|
-|Blue Spider|<search algorithm here>|
-|Brown Spider|<search algorithm here>|
-|Green Spider|<search algorithm here>|
-|Grey Spider|<search algorithm here>|
-|Orange Spider|<search algorithm here>|
-|Red Spider|<search algorithm here>|
-|Yellow Spider|<search algorithm here>|
+|Spartan|DFS Brute Force Algorithm|
+|Black Spider|BFS Brute Force Algorithm|
+|Blue Spider|Iterative Deepinging DFS|
+|Green Spider|Depth Limited DFS|
+|Yellow Spider|Recursive DFS|
 
 ### Fuzzy Logic
 |Input Variables|Description|
@@ -97,7 +93,17 @@ RULE 1 : IF health is high AND weapon is two OR weapon is one THEN risk is low;
 ```
 
 This means that if the Spartans health is high and he has a weapon of any kind, his risk is low as he can attack other spiders and is not in danger of dying
+
 ### Neural Network
+We use the neural network to evaluate the current situation of the Spartan, we look at values such as Health and whether or not he has a sword and bombs. We pass the neural network the values that the Spartan currently has (his health, sword status and both bomb status's) We then output in the console what he should do in this situation such as fight, run and panic. This would then be used to determine what the Spartan should do in certain situations.
+
+|Item|Values|
+|---|---|
+|Health|2 is Good Health, 1 is Okay Health, 0 is Needs Health|
+|Sword|1 is Yes, 0 is No|
+|Bomb|1 is Yes, 0 is No|
+|Hydrogen Bomb|1 is Yes, 0 is No|
+
 
 ## Problems Encountered
 We ran into many issues throughout the development of this application, here we will discuss these issues in detail. The first issue we ran into was assigning an algorithm to a 2D array of characters. The search algorithms that were provided to us were created to interact with a 2D array of Nodes rather than a 2D array of Characters. As there were many algorithms that we could use we made the decision that it would be easier for us to re-write the maze as an array of Nodes rather than re-write the algorithms to use arrays of characters. We ran into issues with the Game View, we found it difficult to update the game view without getting errors. Due to time constraints, we decided to output to the console instead as we didn't have time to fix the game view. We felt as though we would achieve more by printing to the console rather than updating the view. Another issue we faced was using the algorithms effectively, we found that each algorithm was different, meaning the configuring for one algorithm would not work for another. This limited our ability to use different algorithms in this application. Finally, the biggest issue that we faced was time to complete this project. We felt as though given more time with the knowledge we have gained, we could re-configure some of the code and get the application working as intended. 

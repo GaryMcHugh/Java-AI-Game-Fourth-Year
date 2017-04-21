@@ -85,4 +85,6 @@ Below is an example of a Fuzzy rule that is used to determine the risk:
 ```
 RULE 1 : IF health is high AND weapon is two OR weapon is one THEN risk is low;
 ```
+
+This means that if the Spartans health is high and he has a weapon of any kind, his risk is low as he can attack other spiders and is not in danger of dieing
 ### Neural Network

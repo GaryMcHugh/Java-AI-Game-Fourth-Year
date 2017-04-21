@@ -1,9 +1,9 @@
 # Artificial Intelligence Project
 
 **Student Name:** Christy Madden <br />
-**Student ID:** G00214065 <br />
+**Student ID:** G00214065 <br /><br />
 **Student Name:** Gary McHugh <br />
-**Student ID:** G00308668 <br />
+**Student ID:** G00308668 <br /><br />
 **Module:** Artificial Intelligence<br />
 **Lecturer:** Dr John Healy <br />
 
@@ -52,3 +52,17 @@ __if you want to run this in your own IDE follow these steps:__
   2. Open the downloaded file in your preferred IDE or import the project into your IDE.
   3. Go to the GameRunner.Java file in the __ie.gmit.sw.ai.maze__ package.
   4. Run the project as a Java Application from this class.
+
+### AI Search Algorithms
+### Fuzzy Logic
+|Input Variables|Description|
+|---|---|
+|Health| The health is a value that is between 0 and 100 where a value of 0-30 is low health,  a value of 30-70 is moderate health and 70-100 is high health. The characters health along with level of weapon they have contributes to the overall risk.|
+|Weapon|The weapon value describes the value of the weapon taht the character has where, 0 means the character does not have a weapon. 1 means that he character has picked up one sword and 2 means the character has picked up two swords which powers up his current weapon. |
+< br/>
+
+|Output Variables|Description|
+|---|---|
+|Risk| The health is a value that is between 0 and 100 where a value of 0-30 is low health,  a value of 30-70 is moderate health and 70-100 is high health. The characters health along with level of weapon they have contributes to the overall risk.|
+
+### Neural Network

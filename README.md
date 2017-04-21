@@ -59,10 +59,15 @@ __if you want to run this in your own IDE follow these steps:__
 |---|---|
 |Health| The health is a value that is between 0 and 100 where a value of 0-30 is low health,  a value of 30-70 is moderate health and 70-100 is high health. The characters health along with level of weapon they have contributes to the overall risk.|
 |Weapon|The weapon value describes the value of the weapon taht the character has where, 0 means the character does not have a weapon. 1 means that he character has picked up one sword and 2 means the character has picked up two swords which powers up his current weapon. |
-< br/>
+
 
 |Output Variables|Description|
 |---|---|
-|Risk| The health is a value that is between 0 and 100 where a value of 0-30 is low health,  a value of 30-70 is moderate health and 70-100 is high health. The characters health along with level of weapon they have contributes to the overall risk.|
+|Risk|This is evaluated through membership functions and fuzzy rules. It outputs a value between 0 and 2 that is based on the risk the character is at. We then check this output to see what the risk is and make decisions based on that|
 
+Below is an example of a Fuzzy rule that is used to determine the risk:
+
+```
+RULE 1 : IF health is high AND weapon is two OR weapon is one THEN risk is low;
+```
 ### Neural Network

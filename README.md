@@ -54,16 +54,19 @@ __if you want to run this in your own IDE follow these steps:__
   4. Run the project as a Java Application from this class.
 
 ### AI Search Algorithms
+The AI Search Algorithms are used to make the characters traverse the maze, there are various algorithms to do this. We first assigned the Brute Force Algorithm to the Spartan and manually set a goal node for him to reach. This was to ensure that we could successfully traverse the maze. Once we had this working we applied it to the Sprites. We used an Executor Service to thread the Sprites, allowing multiple Sprites to search for the goal node at the same time. We assigned different algorithms to different Sprites.
+
+__table here with algorithms on coloured spider__
 ### Fuzzy Logic
 |Input Variables|Description|
 |---|---|
 |Health| The health is a value that is between 0 and 100 where a value of 0-30 is low health,  a value of 30-70 is moderate health and 70-100 is high health. The characters health along with level of weapon they have contributes to the overall risk.|
-|Weapon|The weapon value describes the value of the weapon taht the character has where, 0 means the character does not have a weapon. 1 means that he character has picked up one sword and 2 means the character has picked up two swords which powers up his current weapon. |
+|Weapon|The weapon value describes the value of the weapon that the character has where, 0 means the character does not have a weapon. 1 means that he character has picked up one sword and 2 means the character has picked up two swords which powers up his current weapon. |
 
 
 |Output Variables|Description|
 |---|---|
-|Risk|This is evaluated through membership functions and fuzzy rules. It outputs a value between 0 and 2 that is based on the risk the character is at. We then check this output to see what the risk is and make decisions based on that|
+|Risk|This is evaluated through membership functions and fuzzy rules. It outputs a value between 0 and 2 that is based on the risk the character is at. We then check this output to see what the risk is and make decisions based on that output.|
 
 Below is an example of a Fuzzy rule that is used to determine the risk:
 

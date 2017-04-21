@@ -1,4 +1,4 @@
-# Artificial Intelligence
+# Artificial Intelligence Project
 
 **Student Name:** Christy Madden <br />
 **Student ID:** G00214065 <br />
@@ -22,9 +22,9 @@ ___
 
 ### What is the application?
 
-This application uses Artificial Intelligence Search Algorithms such as a Brute Force Algorithm and a Depth Limited Depth First Search to allow a game character to find a goal node within a maze. The main spartan characters movement is controlled by a single search algorithm, the Sprites (Spiders) are controlled by different search alorithms. The Sprites are also threaded using an Executor Service allowing them to execute in parallel along with the main spartan character. Fuzzy Logic and Neural Networks are also used in this application. The Fuzzy Logic is responsible for determining the level of risk the spartan character has, this is done by using the value for the spartans health along with its weapon level. The risk level is determined through Fuzzy rules we created coupled with various membership functions. With this risk we will decide on what the goal node for the spartan should be, i.e. if risk is high the spartan should look for a weapon. The Neural Network is responsible for determining what the spartan should do based on the situation. For Example, if the spartan has low health and no weapon and encounters a sprite, he needs to run. If he encounters a sprite with high health and a weapon he should fight.
+This application uses Artificial Intelligence Search Algorithms such as a Brute Force Algorithm and a Depth Limited Depth First Search to allow a game character to find a goal node within a maze. The main Spartan characters movement is controlled by a single search algorithm, the Sprites (Spiders) are controlled by different search algorithms. The Sprites are also threaded using an Executor Service allowing them to execute in parallel along with the main Spartan character. Fuzzy Logic and Neural Networks are also used in this application. The Fuzzy Logic is responsible for determining the level of risk the Spartan character has, this is done by using the value for the Spartans health along with its weapon level. The risk level is determined through Fuzzy rules we created coupled with various membership functions. With this risk, we will decide on what the goal node for the Spartan should be, i.e. if risk is high the Spartan should look for a weapon. The Neural Network is responsible for determining what the Spartan should do based on the situation. For Example, if the Spartan has low health and no weapon and encounters a sprite, he needs to run. If he encounters a sprite with high health and a weapon he should fight.
 
-### What does the appication run on?
+### What does the application run on?
 
 This application is built using Java and will run on any machine or OS once it has Java installed. It is recommended that your computer has Java 8 installed. 
 
@@ -49,6 +49,6 @@ __if you want to run this in your own IDE follow these steps:__
 	git clone https://github.com/chris2020/Java-AI-Game-Fourth-Year.git
 	```
   
-  2. Open the downloaded file in your perferred IDE or import the project into your IDE.
+  2. Open the downloaded file in your preferred IDE or import the project into your IDE.
   3. Go to the GameRunner.Java file in the __ie.gmit.sw.ai.maze__ package.
   4. Run the project as a Java Application from this class.

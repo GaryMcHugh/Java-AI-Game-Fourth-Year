@@ -55,7 +55,7 @@ __if you want to run this in your own IDE follow these steps:__
   4. Run the project as a Java Application from this class.
   
 ## Features
-The features os this application are listed below:
+The features of this application are listed below:
 + Re-written the maze as a 2D Node Array
 + Spartan can move using a search algorithm
 + Sprites are threaded using Executor Service
@@ -82,7 +82,7 @@ The AI Search Algorithms are used to make the characters traverse the maze, ther
 ### Fuzzy Logic
 |Input Variables|Description|
 |---|---|
-|Health| The health is a value that is between 0 and 100 where a value of 0-30 is low health,  a value of 30-70 is moderate health and 70-100 is high health. The characters health along with level of weapon they have contributes to the overall risk.|
+|Health| The health is a value that is between 0 and 100 where a value of 0-30 is low health, a value of 30-70 is moderate health and 70-100 is high health. The character's health along with level of weapon they have contributes to the overall risk.|
 |Weapon|The weapon value describes the value of the weapon that the character has where, 0 means the character does not have a weapon. 1 means that he character has picked up one sword and 2 means the character has picked up two swords which powers up his current weapon. |
 
 
@@ -100,4 +100,4 @@ This means that if the Spartans health is high and he has a weapon of any kind, 
 ### Neural Network
 
 ## Problems Encountered
-We ran into many issues throughout the development of this application, here we will discuss these issues in detail. The first issue we ran into was asiigning an algorithm to a 2D array of characters. The search algorithms that were provided to us were created to intersct with a 2D array of Nodes rather than a 2D array of Characters. As there were many algoithms that we could use we made the decision that it would be easier for us to re-write the maze as an array of Nodes rather than re-write the algorithms to use arrays of characters. We ran into issues with the Game View, we found it difficult to update the gamme view without getting erros. Due to time constraints we decided to output to the conole instead as we didnt have time to fix the game view. We felt as though we would achieve more by printing to the console rather than updating the view. Another issue we faced was using the algorithms effectively, we found that each algorithm was different, meaning the configuring for one algorithm would not work for another. This limited our ability to use different algorithms in this application. Finally, the biggest issue thatw e faced was time to complete this project. We felt as though given more time with the knowledge we have gained, we could re-configure some of the code and get the application working as inteneded. 
+We ran into many issues throughout the development of this application, here we will discuss these issues in detail. The first issue we ran into was assigning an algorithm to a 2D array of characters. The search algorithms that were provided to us were created to interact with a 2D array of Nodes rather than a 2D array of Characters. As there were many algorithms that we could use we made the decision that it would be easier for us to re-write the maze as an array of Nodes rather than re-write the algorithms to use arrays of characters. We ran into issues with the Game View, we found it difficult to update the game view without getting errors. Due to time constraints, we decided to output to the console instead as we didn't have time to fix the game view. We felt as though we would achieve more by printing to the console rather than updating the view. Another issue we faced was using the algorithms effectively, we found that each algorithm was different, meaning the configuring for one algorithm would not work for another. This limited our ability to use different algorithms in this application. Finally, the biggest issue that we faced was time to complete this project. We felt as though given more time with the knowledge we have gained, we could re-configure some of the code and get the application working as intended. 

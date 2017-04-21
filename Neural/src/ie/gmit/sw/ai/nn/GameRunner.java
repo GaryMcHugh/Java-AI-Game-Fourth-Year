@@ -3,12 +3,12 @@ package ie.gmit.sw.ai.nn;
 import ie.gmit.sw.ai.nn.activator.Activator;
 
 public class GameRunner {
-	/*
-	    1 Health (2 is Good Health, 1 is Okay Health, 0 is Needs Health)
-	    2 Sword (1 is Yes, 0 is No)
-	    3 Bomb (1 is Yes, 0 is No)
-	    4 Hydrogen Bomb (1 is Yes, 0 is No)
-	*/
+
+    //1 Health (2 is Good Health, 1 is Okay Health, 0 is Needs Health)
+    //2 Sword (1 is Yes, 0 is No)
+    //3 Bomb (1 is Yes, 0 is No)
+    //4 Hydrogen Bomb (1 is Yes, 0 is No)
+
 	private double[][] data = { // Health, Sword, Gun, Enemies
 			{ 2, 0, 0, 0 }, { 2, 0, 0, 1 }, { 2, 0, 1, 1 }, { 2, 0, 1, 2 }, { 2, 1, 0, 2 }, { 2, 1, 0, 1 },
 			{ 1, 0, 0, 0 }, { 1, 0, 0, 1 }, { 1, 0, 1, 1 }, { 1, 0, 1, 2 }, { 1, 1, 0, 2 }, { 1, 1, 0, 1 },
@@ -50,8 +50,6 @@ public class GameRunner {
 		for (double val : result){
 			System.out.println(val);
 		}
-		
-		//System.out.println("==> " + (Utils.getMaxIndex(result) + 1));
 
 		//we want the output with the highest value
 		int choice = (Utils.getMaxIndex(result) + 1);
@@ -74,19 +72,22 @@ public class GameRunner {
 	public static void main(String[] args) throws Exception {
 		Decision combatNet = new Decision();
 
-        combatNet.action(0.5, 1, 1, 0.5); // attack
+        combatNet.action(0.5, 1, 1, 0.5);
         combatNet.action(0, 1, 1, 0);
         combatNet.action(0, 1, 1, 0);
         combatNet.action(0, 1, 1, 0);
-        combatNet.action(0.5, 0, 0, 0.5); // panic
+        
+        combatNet.action(0.5, 0, 0, 0.5);
         combatNet.action(0.5, 0, 0, 0.5);
         combatNet.action(0.5, 0, 0, 0.5);
         combatNet.action(0.5, 0, 0, 0.5);
         combatNet.action(0, 0, 1, 1);
-        combatNet.action(0, 0, 1, 1); // run
+        
         combatNet.action(0, 0, 1, 1);
         combatNet.action(0, 0, 1, 1);
-        combatNet.action(0, 1, 0, 0); // heal
+        combatNet.action(0, 0, 1, 1);
+        
+        combatNet.action(0, 1, 0, 0);
         combatNet.action(0, 1, 0, 0);
         combatNet.action(0, 1, 0, 0);
         combatNet.action(0, 1, 0, 0);

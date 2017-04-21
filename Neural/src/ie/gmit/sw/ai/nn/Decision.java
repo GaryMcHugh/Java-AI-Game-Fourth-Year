@@ -12,12 +12,10 @@ private NeuralNetwork nn;
 		trainer.train(data, expected, 0.01, 10000);
 	}
 	
-	/*
-	    1 Health (2 is Good Health, 1 is Okay Health, 0 is Needs Health)
-	    2 Sword (1 is Yes, 0 is No)
-	    3 Bomb (1 is Yes, 0 is No)
-	    4 Hydrogen Bomb (1 is Yes, 0 is No)
-	*/
+    //1 Health (2 is Good Health, 1 is Okay Health, 0 is Needs Health)
+    //2 Sword (1 is Yes, 0 is No)
+    //3 Bomb (1 is Yes, 0 is No)
+    //4 Hydrogen Bomb (1 is Yes, 0 is No)
 
 	private double[][] data = { // Health, Sword, Gun, Enemies
 	            // No Sword, No Bomb
@@ -82,30 +80,26 @@ private NeuralNetwork nn;
 	public void action(double health, double sword, double bomb, double hBomb) throws Exception {
 		double[] params = {health, sword, bomb, hBomb};
 		
-		NeuralNetwork nn = new NeuralNetwork(Activator.ActivationFunction.Sigmoid, 4, 3, 4);
-
-		Trainator trainer = new BackpropagationTrainer(nn);
-		trainer.train(data, expected, 0.01, 10000);
-
 		double[] result = nn.process(params);
 		
 		for (double val : result){
 			System.out.println(val);
 		}
-		
-		//System.out.println("==> " + (Utils.getMaxIndex(result) + 1));
 
 		//we want the output with the highest value
 		int choice = (Utils.getMaxIndex(result) + 1);
 
 		switch (choice) {
 		case 1:
+			//return data in here
 			panic();
 			break;
 		case 2:
+			//return data in here
 			attack();
 			break;
 		case 3:
+			//return data in here
 			hide();
 			break;
 		default:
@@ -119,7 +113,7 @@ private NeuralNetwork nn;
 		double bomb = Double.parseDouble(args[2]);
 		double hBomb = Double.parseDouble(args[3]);
 		
-		//run, run configurations, arguements tab, fill in arguements, apply and run
+		//run, run configurations, arguments tab, fill in arguments, apply and run
 		new GameRunner().action(health, sword, bomb, hBomb);
 	}
 }

@@ -15,12 +15,10 @@ public class GameRunner //implements KeyListener
 	// =============== Constants  ===============
 	
 	private static final int MAZE_DIMENSION = 100;
-	private static final int IMAGE_COUNT = 14;
 	
 	// =============== Variables  ===============
 	
 	private Maze maze;
-	private int currentRow, currentCol;
 	
 	// Main method to start the game 
 	public static void main(String[] args) throws Exception 

@@ -71,11 +71,12 @@ The AI Search Algorithms are used to make the characters traverse the maze, ther
 |---|---|
 |Spartan|DFS Brute Force Algorithm|
 |Black Spider|BFS Brute Force Algorithm|
-|Blue Spider|Iterative Deepinging DFS|
+|Blue Spider|Iterative Deepening DFS|
 |Green Spider|Depth Limited DFS|
 |Yellow Spider|Recursive DFS|
 
 ### Fuzzy Logic
+ We used fuzzy logic to output the risk that the Spartan has based on his health and whether or not he had a sword. The idea behind this was that we could evaluate the Spartans situation and change his goal node based on it. For Example, if the Spartan had moderate health and no weapon we would assign him a goal of getting a weapon. If the Spartan had high health and a weapon we would set the goal to be a spider to attack. This logic can clearly be seen in our fuzzy rules.
 |Input Variables|Description|
 |---|---|
 |Health| The health is a value that is between 0 and 100 where a value of 0-30 is low health, a value of 30-70 is moderate health and 70-100 is high health. The character's health along with level of weapon they have contributes to the overall risk.|

@@ -36,7 +36,7 @@ The application can be downloaded from GitHub using the above link. You will be 
 **Example command to run** 
 
  ```
-    java –cp ./game.jar ie.gmit.sw.ai.GameRunner
+    java –cp ./game.jar ie.gmit.sw.ai.maze.GameRunner
  ```
 
  * __java__ is the command needed to run a java application

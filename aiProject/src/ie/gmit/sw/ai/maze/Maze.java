@@ -1,8 +1,5 @@
 package ie.gmit.sw.ai.maze;
 
-import ie.gmit.sw.ai.characters.Spider;
-import ie.gmit.sw.ai.characters.Player;
-
 /*
  * 
  *  The maze is constructed of Nodes which each have a certain character
@@ -15,6 +12,7 @@ public class Maze
 	
 	// ============  CONTANTS  ============
 	private final int Num_Of_Enemies = 1;
+	private final int Num_Of_Features = 3;
 	
 	// ============  Variables  ============
 	private Node[][] maze;
@@ -32,42 +30,7 @@ public class Maze
 		
 		// Add spaces to the maze
 		buildMaze();
-		
-		int featureNumber = (int)((mazeDimension * mazeDimension) * 0.01);
-		
-		// ==========  Features are sent in as Escaped Unicode Which will later be changed into a true numerical form  ==========
-		// ==========  and that will be used to get the image from the BufferedImage array in Sprite class             ==========
 		 
-		addFeature('\u0031', '0', featureNumber, "Sword"); //1 is a sword, 0 is a hedge
-		addFeature('\u0032', '0', featureNumber, "Help-Hedge"); //2 is help, 0 is a hedge
-		addFeature('\u0033', '0', featureNumber, "Bomb"); //3 is a bomb, 0 is a hedge
-		addFeature('\u0034', '0', featureNumber, "Hydrogen Bomb"); //4 is a hydrogen bomb, 0 is a hedge
-	
-		//addFeature('\u0036', '0', featureNumber, "Black");  //6 is a Black Spider, 0 is a hedge
-		
-		/*addFeature('\u0037', '0', featureNumber, "Blue");   //7 is a Blue Spider, 0 is a hedge
-		addFeature('\u0038', '0', featureNumber, "Brown");  //8 is a Brown Spider, 0 is a hedge
-		addFeature('\u0039', '0', featureNumber, "Green");  //9 is a Green Spider, 0 is a hedge
-		addFeature('\u003A', '0', featureNumber, "Grey");   //: is a Grey Spider, 0 is a hedge
-		addFeature('\u003B', '0', featureNumber, "Orange"); //; is a Orange Spider, 0 is a hedge
-		addFeature('\u003C', '0', featureNumber, "Red");    //< is a Red Spider, 0 is a hedge
-		addFeature('\u003D', '0', featureNumber, "Yellow"); //= is a Yellow Spider, 0 is a hedge*/
-		
-		// Place goal node for player to search for
-		insertGoalNode();
-		
-		//addFeature('5', '0', featureNumber, "Spartan");  //5 is the Spartan, 0 is a hedge
-		
-		// =================  NOTE  =================
-		// Player starts searching immediately after 
-		//    the node is set to a place in maze 
-		// ==========================================
-		addPlayer(5, 5);
-		
-		// ==========  FOR TESTING PURPOSES  ==========
-		// Print out the entire maze including borders
-		printFullMaze();
-		
 	}// End constructor Maze
 	
 	// ====================  Helper Methods  ====================
@@ -83,11 +46,7 @@ public class Maze
 			for (int col = 0; col < maze[row].length; col++)
 			{
 				
-				// Need to initialize every element in array to a new node
-				maze[row][col] = new Node(row, col, '0', "Hedge");
-				
-				// Set nodes in maze to be hedges
-				//maze[row][col].setElement('0');
+				maze[row][col] = new Node("Hedge", '0', row, col);
 				
 			}// End inner for
 			
@@ -117,9 +76,8 @@ public class Maze
 				{
 					
 					// Fill node in maze with a space
-					maze[row][col + 1].setElement('\u0020');; 
-					
-					//System.out.print(maze[row][col + 1].getElement());
+					//maze[row][col + 1].setElement('\u0020');
+					maze[row][col] = new Node("Space", '\u0020', row, col);
 					
 				}
 				else
@@ -129,47 +87,22 @@ public class Maze
 					if (row + 1 < maze.length - 1)
 					{
 						
-						// Fill node in maze with a space
-						maze[row + 1][col].setElement('\u0020');
+						maze[row + 1][col] = new Node("Space", '\u0020', row, col);
 						
 					}// End if
 					
-					//System.out.print(maze[row][col + 1].getElement());
 				}// End if / else
 				
 			}// End inner for
 			
-			//System.out.println();
 		}// End outer for
 		
 	}// End method buildMaze
 	
-	private void insertGoalNode()
-	{
-		
-		// ====================  NOTE  ====================
-		//       Don't have goal node equal to 7,7
-		//     randomly gives out of bounds exception 
-		// ================================================
-		
-		maze[10][10] = new Node(10, 10, 'G', "Goal Node");
-		maze[10][10].setGoalNode(true);
-		//maze[10][10].setElement('G');
-		
-	}
-	
-	private void addPlayer(int row, int col) throws Exception
-	{
-		
-			// Hard code position of Spartan for now
-			maze[5][5] = new Player(5, 5, '5', maze, "Spartan");
-		
-	}// End method addPlayer
-	
 	// Add items and spiders to maze
 	// Random elements are selected and if they are hedges 
 	// then get replaced with the item or spider
-	private void addFeature(char feature, char replace, int number, String name) throws Exception 
+	public void addSpiders(char element, char replace, String name) throws Exception 
 	{
 		
 		int counter = 0;
@@ -185,19 +118,20 @@ public class Maze
 			// element is a hedge 
 			if (maze[row][col].getElement() == replace)
 			{	
+				/*
+				if(element <= '\u0034')
+				{
+					
+					maze[row][col] = new Node(name, element, row, col);
+					
+				}*/
 				
-				if(feature <= '\u0034')
+				if(element >= '\u0036')// If it's a Spider (>= 6)
 				{
 					
-					maze[row][col] = new Node(row, col, feature, name);
+					maze[row][col] = new Node(name, element, row, col);
 					
-				}
-				else if(feature >= '\u0036')// If it's a Spider (>= 6)
-				{
-					
-					maze[row][col] = new Spider(row, col, feature, maze, null, (name + "_" + counter));// Unique spider name
-					
-					//maze[row][col].setElement(feature); // Old code
+					new ExecuteSpiders(row, col, name, maze);
 				}
 				
 				counter++;
@@ -208,8 +142,40 @@ public class Maze
 		
 	}// End method addFeature
 	
+	public void addFeature(char element, char replace, String name)
+	{
+		
+		int counter = 0;
+		
+		// Add items and spiders
+		while (counter < Num_Of_Features)
+		{
+			
+			// Generate random number and check that element
+			int row = (int) (maze.length * Math.random());
+			int col = (int) (maze[0].length * Math.random());
+			
+			// element is a hedge 
+			if (maze[row][col].getElement() == replace)
+			{	
+				
+				if(element <= '\u0034')
+				{
+					
+					maze[row][col] = new Node(name, element, row, col);
+					
+				}
+				
+				counter++;
+				
+			}// End if
+			
+		}// End while
+		
+	}// End addFeature
+	
 	// Print out the entire maze
-	private void printFullMaze()
+	public void printFullMaze()
 	{
 		
 		// Loop through the whole array

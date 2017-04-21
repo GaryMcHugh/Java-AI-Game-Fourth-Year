@@ -1,57 +1,41 @@
 package ie.gmit.sw.ai.characters;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import ie.gmit.sw.ai.maze.BruteForceTraversator;
-import ie.gmit.sw.ai.maze.IDDFSTraversator;
 import ie.gmit.sw.ai.maze.Node;
-import ie.gmit.sw.ai.maze.Traversator;
 
-public class Spider extends Node
+/*
+ * 
+ * The different spiders included are
+ * 	Black   - '6'
+ *  Blue    - '7'
+ *  Yellow  - '='
+ *  Green   - '9'
+ * 
+ */
+
+public class Spider 
 {
 
 	private Node[][] maze;
-	private ExecutorService executor = Executors.newFixedThreadPool(5);
-	private Player player;
+	
 	private String name;
-
-	public Spider(int row, int col, char element, Node[][] maze, Player player, String name) 
+	
+	public Spider(int row, int col, char element, Node[][] maze, String name) 
 	{
-		super(row, col, element, name);
 		
 		this.maze = maze;
-		this.player = player;
 		this.name = name;
 		
-		System.out.println("Player Constructor" + " Maze: " + maze);
-		
-		/*executor.submit(() -> {
-			
-			
-			while(true)
-			{
-				
-				//System.out.println(row + " " + col);
-				Traversator t = new IDDFSTraversator();
-				
-				//Traversator t;
-				try {
-					//t = new BruteForceTraversator(true);
-					//System.out.println("Spider");
-					t.traverse(maze, maze[row][col]);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				break;
-			}// End while
-			
-			
-		});// End executor*/
-		
 	}// End constructor Spider
+	
+	public Node[][] getMaze() 
+	{
+		return maze;
+	}
+
+	public void setMaze(Node[][] maze) 
+	{
+		this.maze = maze;
+	}
 	
 	public String getName() 
 	{
@@ -62,4 +46,5 @@ public class Spider extends Node
 	{
 		this.name = name;
 	}
+
 }// End class Spider

@@ -1,21 +1,15 @@
 package ie.gmit.sw.ai.maze;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import javax.swing.JFrame;
-
 import ie.gmit.sw.ai.characters.Player;
 import ie.gmit.sw.ai.fl.FuzzyLogic;
+import ie.gmit.sw.ai.traversers.*;
 
 /*
  * 
  *  This class is be used for starting the game
  * 
  */
-public class GameRunner implements KeyListener
+public class GameRunner //implements KeyListener
 {
 	
 	// =============== Constants  ===============
@@ -26,13 +20,8 @@ public class GameRunner implements KeyListener
 	// =============== Variables  ===============
 	
 	private Maze maze;
-	private GameView view;
+	private int currentRow, currentCol;
 	
-	/*private int currentRow = 5;
-	private int currentCol = 5;*/
-	
-	private Player player;
-		
 	// Main method to start the game 
 	public static void main(String[] args) throws Exception 
 	{
@@ -45,161 +34,82 @@ public class GameRunner implements KeyListener
 	public GameRunner() throws Exception
 	{
 		
+		System.out.println("Maze being built\n");
+		
 		new FuzzyLogic();
 		
-		System.out.println("Maze being initalized: In GameRunner Constructor\n");
+		printNN();
 		
 		// Initialize size of maze
 		maze = new Maze(MAZE_DIMENSION);
-	
-		// Pass a copy of the initialized maze into the game view 
-		view = new GameView(maze);
 		
-		Sprite[] sprites = getSprites();
-    	view.setSprites(sprites);
-    	
-    	
-    	// ************  NOTE  ************
-    	// Game crashes without this method
-    	// ********************************
-    	// Position player in the maze
-	    // Initialize node to starting position
-	    //placePlayer();
-	    
-		//printFullMaze();
-    	
-    	// Sets size of the game view
-    	setGameDimension();
-    	
-    	// Builds the window for the game view
-    	buildWindow();
-    	
-		//printFullMaze();
-				
+    	// Insert goal node in random position
+		setGoalNode();
+		
+		setFeatures();
+		
+		setSpiders();
+		
+		// ***********  PLACE PLAYER INTO THE MAZE HERE  ***********
+		setPlayerInMaze();
+		
+		maze.printFullMaze();
+		
 	}// End constructor GameRunner
 	
-	private Sprite[] getSprites() throws Exception
+	private void setGoalNode()
 	{
 		
-		//Read in the images from the resources directory as sprites. Note that each
-		//sprite will be referenced by its index in the array, e.g. a 3 implies a Bomb...
-		//Ideally, the array should dynamically created from the images... 
-		Sprite[] sprites = new Sprite[IMAGE_COUNT];
-		sprites[0] = new Sprite("Hedge", "resources/hedge.png");
-		sprites[1] = new Sprite("Sword", "resources/sword.png");
-		sprites[2] = new Sprite("Help", "resources/help.png");
-		sprites[3] = new Sprite("Bomb", "resources/bomb.png");
-		sprites[4] = new Sprite("Hydrogen Bomb", "resources/h_bomb.png");
-		sprites[5] = new Sprite("Spartan Warrior", "resources/spartan_1.png", "resources/spartan_2.png");
-		sprites[6] = new Sprite("Black Spider", "resources/black_spider_1.png", "resources/black_spider_2.png");
-		sprites[7] = new Sprite("Blue Spider", "resources/blue_spider_1.png", "resources/blue_spider_2.png");
-		sprites[8] = new Sprite("Brown Spider", "resources/brown_spider_1.png", "resources/brown_spider_2.png");
-		sprites[9] = new Sprite("Green Spider", "resources/green_spider_1.png", "resources/green_spider_2.png");
-		sprites[10] = new Sprite("Grey Spider", "resources/grey_spider_1.png", "resources/grey_spider_2.png");
-		sprites[11] = new Sprite("Orange Spider", "resources/orange_spider_1.png", "resources/orange_spider_2.png");
-		sprites[12] = new Sprite("Red Spider", "resources/red_spider_1.png", "resources/red_spider_2.png");
-		sprites[13] = new Sprite("Yellow Spider", "resources/yellow_spider_1.png", "resources/yellow_spider_2.png");
-		return sprites;
-	}
-	
-	/*private void placePlayer()
-	{   
-		// ======================  Have to set spartan in maze or he won't show up in game view ======================
-		//A Spartan warrior is at index 5
-    	maze.set(currentRow, currentCol, '5'); 
-    	
-    	view.setCurrentRow(currentRow);
-    	view.setCurrentCol(currentCol);
-    		
-	}*/
-	
-	private void buildWindow()
-	{
-		JFrame f = new JFrame("GMIT - B.Sc. in Computing (Software Development)");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.addKeyListener(this);
-        f.getContentPane().setLayout(new FlowLayout());
-        f.add(view);
-        f.setSize(1000,1000);
-        f.setLocation(100,100);
-        f.pack();
-        f.setVisible(true);
-	}
-	
-	private void setGameDimension()
-	{
+		// Generate random number and set the goal node at that location
+		int row = (int) (MAZE_DIMENSION * Math.random());
+		int col = (int) (MAZE_DIMENSION * Math.random());
 		
-		Dimension d = new Dimension(GameView.DEFAULT_VIEW_SIZE, GameView.DEFAULT_VIEW_SIZE);
-    	view.setPreferredSize(d);
-    	view.setMinimumSize(d);
-    	view.setMaximumSize(d);
+		maze.getMaze()[row][col] = new Node("Goal", 'G', row, col);
+		maze.getMaze()[row][col].setGoalNode(true);
+		
+		System.out.println("\n*****  Goal Node Set  *****\n");
 		
 	}
 	
-	public void updateView()
+	private void printNN()
 	{
-	
-		// Get player values and update them in view
-		view.setCurrentRow(player.getRow());
-		view.setCurrentRow(player.getCol());
+		
+		System.out.println("\n\n-----------Nerual Network Stats ----------");
+		new Player();
 	}
 	
-	/*private void printFullMaze()
+	private void setPlayerInMaze()
 	{
 		
-		// Loop through the whole array
-		for (int row = 0; row < maze.getMaze().length; row++)
-		{
-			
-			for (int col = 0; col < maze.getMaze()[row].length; col++)
-			{
-				
-				// Print out the character at that node
-				System.out.print(maze.getMaze()[row][col].getElement());
-				
-			}// End inner for
-			
-			System.out.println();
-			
-		}// End outer for
+		System.out.println("\n*****  Spartan Set and Searching *****\n");
 		
-	}// End method printFullMaze
-*/
-	// ==========  IGNORE  ==========
-	public void keyPressed(KeyEvent e) 
-	{
+		// Generate random number and check that element
+		int currentRow = (int) (MAZE_DIMENSION * Math.random());
+		int currentCol = (int) (MAZE_DIMENSION * Math.random());
 		
-		/*if (e.getKeyCode() == KeyEvent.VK_RIGHT && currentCol < MAZE_DIMENSION - 1) {
-        	if (isValidMove(currentRow, currentCol + 1)) currentCol++;   		
-        }else if (e.getKeyCode() == KeyEvent.VK_LEFT && currentCol > 0) {
-        	if (isValidMove(currentRow, currentCol - 1)) currentCol--;	
-        }else if (e.getKeyCode() == KeyEvent.VK_UP && currentRow > 0) {
-        	if (isValidMove(currentRow - 1, currentCol)) currentRow--;
-        }else if (e.getKeyCode() == KeyEvent.VK_DOWN && currentRow < MAZE_DIMENSION - 1) {
-        	if (isValidMove(currentRow + 1, currentCol)) currentRow++;        	  	
-        }else if (e.getKeyCode() == KeyEvent.VK_Z){
-        	view.toggleZoom();
-        }else{
-        	return;
-        }
-        
-        updateView(); */
+		// Place player into maze at these coordinates
+		maze.getMaze()[currentRow][currentCol] = new Node("Player", '5', 1, 1);
+		
+		Traversator t  = new BruteForceTraversator(true);	
+		t.traverse(maze.getMaze(), maze.getMaze()[98][98]);
 		
 	}
-
-	/*private boolean isValidMove(int row, int col)
+	
+	private void setFeatures()
 	{
-		if (row <= maze.size() - 1 && col <= maze.size() - 1 && maze.get(row, col) == ' '){
-			maze.set(currentRow, currentCol, '\u0020');
-			maze.set(row, col, '5');
-			return true;
-		}else{
-			return false; //Can't move
-		}
-	}*/
+		maze.addFeature('\u0031', '0', "Sword"); //1 is a sword, 0 is a hedge
+		maze.addFeature('\u0032', '0',  "Help-Hedge"); //2 is help, 0 is a hedge
+		maze.addFeature('\u0033', '0', "Bomb"); //3 is a bomb, 0 is a hedge
+		maze.addFeature('\u0034', '0', "Hydrogen Bomb"); //4 is a hydrogen bomb, 0 is a hedge
+		
+	}
 	
-	public void keyReleased(KeyEvent e) {}
-
-	public void keyTyped(KeyEvent e) {}
-	
+	private void setSpiders() throws Exception
+	{
+		maze.addSpiders('\u0036', '0', "Black");
+		maze.addSpiders('\u0036', '0', "Blue");
+		maze.addSpiders('\u0036', '0', "Yellow");
+		maze.addSpiders('\u0036', '0', "Green");
+	}
+		
 }// End class GameRunner

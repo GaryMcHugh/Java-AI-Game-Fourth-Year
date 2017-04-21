@@ -1,7 +1,6 @@
 package ie.gmit.sw.ai.maze;
 
 import java.awt.image.BufferedImage;
-
 import javax.imageio.ImageIO;
 
 /*
@@ -21,9 +20,6 @@ public class Sprite
 	//Initial starting index in array
  	private int index = 0; 
  	
- 	// Added code
- 	//private double lifeForce = 500;
- 	
 	public Sprite(String name, String... images) throws Exception
 	{
 		
@@ -42,14 +38,6 @@ public class Sprite
 		}
 		
 	}// End constructor Sprite
-	
-	
-	/*public boolean isAlive()
-	{
-		
-		return lifeForce > 0;
-		
-	}*/
 	
 	//Returns the next image frame
 	public BufferedImage getNext()

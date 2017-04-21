@@ -1,41 +1,111 @@
 package ie.gmit.sw.ai.characters;
 
-import ie.gmit.sw.ai.maze.*;
+import ie.gmit.sw.ai.neuralnetwork.Decision;
 
 /*
  * 
- *  Player is a node
+ *  Class has information about the state of the player
  * 
  */
 
-public class Player extends Node 
+public class Player
 {
 	
-	private Node[][] maze;
-	private int row, col;
 	private String name;
+	private int row, col;
 	
-	private Traversator t;
-
-	public Player(int currentRow, int currentCol, char c, Node[][] maze, String name) throws Exception 
+	private Decision decision;
+	
+	// Player state for AI Decisions
+	private double health = 1;
+	private double weaponLevel = 0;
+	private double bomb = 0;
+	private double hydrogrenBomb = 0;
+	
+	public Player()
 	{
-		super(currentRow, currentCol, c, name);
+		decision = new Decision();
+	}
+	
+	public void playerDecision()
+	{
 		
-		this.maze = maze;
+		try 
+		{
+			decision.action(health, weaponLevel, bomb, hydrogrenBomb);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
+	// ===============  Getters / Setters ===============
+	public String getName() 
+	{
+		return name;
+	}
+
+	public void setName(String name) 
+	{
 		this.name = name;
-		this.row = currentRow;
-		this.col = currentCol;
-		
-		t = new BruteForceTraversator(true);
-		t.traverse(maze, maze[row][col]);
-		
-		// Swap into new position 
-		
-		//t = new IDDFSTraversator();
-		//t.traverse(maze, maze[row][col]);
-		//t = new RecursiveDFSTraversator();
-		//t.traverse(maze, maze[row][col]);
-		
+	}
+
+	public int getRow()
+	{
+		return row;
+	}
+
+	public void setRow(int row)
+	{
+		this.row = row;
+	}
+
+	public int getCol() 
+	{
+		return col;
+	}
+
+	public void setCol(int col) 
+	{
+		this.col = col;
+	}
+	
+	public double getHealth()
+	{
+		return health;
+	}
+	
+	public void setHealth(double health) 
+	{
+		this.health = health;
+	}
+
+	public double getWeaponLevel()
+	{
+		return weaponLevel;
+	}
+
+	public void setWeaponLevel(double weaponLevel) 
+	{
+		this.weaponLevel = weaponLevel;
+	}
+
+	public double getBomb() {
+		return bomb;
+	}
+
+	public void setBomb(double bomb) {
+		this.bomb = bomb;
+	}
+
+	public double getHydrogrenBomb() {
+		return hydrogrenBomb;
+	}
+
+	public void setHydrogrenBomb(double hydrogrenBomb) {
+		this.hydrogrenBomb = hydrogrenBomb;
 	}
 
 }// End class Player

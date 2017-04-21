@@ -11,7 +11,7 @@ ___
 
 # Introduction	
 
-### Technologies Used:
+## Technologies Used:
 
 + **Operating System:** Linux Mint 18.1 "Serena", Windows 10
 + **IDE:** Eclipse, Visual Studio Code
@@ -28,7 +28,7 @@ This application uses Artificial Intelligence Search Algorithms such as a Brute 
 
 This application is built using Java and will run on any machine or OS once it has Java installed. It is recommended that your computer has Java 8 installed. 
 
-### Deployment Details
+## Deployment Details
 The application can be downloaded from GitHub using the above link. You will be need to run it from the command line. It is recommended that you navigate to the root directory of the project. Here you can run the command that will start the application.
 
 **Note** _you will need to have a jar file if you want the application to run and you will need to be add it to the classpath_
@@ -54,7 +54,10 @@ __if you want to run this in your own IDE follow these steps:__
   3. Go to the GameRunner.Java file in the __ie.gmit.sw.ai.maze__ package.
   4. Run the project as a Java Application from this class.
   
-### Features
+## Features
+
+### Additional Features
+An additional feature that we added to this project was to add a search algorithm to the Spartan. Initially the Spartan was being controlled by the user using input from the keyboard. In our project this has been changed so that the Spartan is now being controlled with a Search Algorithm. This search algorithm allows us to set a goal node such as a sword or a Sprite and have the Spartan traverse his way through the maze using the algorithm to the goal node. 
 
 ### AI Search Algorithms
 The AI Search Algorithms are used to make the characters traverse the maze, there are various algorithms to do this. We first assigned the Brute Force Algorithm to the Spartan and manually set a goal node for him to reach. This was to ensure that we could successfully traverse the maze. Once we had this working we applied it to the Sprites. We used an Executor Service to thread the Sprites, allowing multiple Sprites to search for the goal node at the same time. We assigned different algorithms to different Sprites.

@@ -53,6 +53,8 @@ __if you want to run this in your own IDE follow these steps:__
   2. Open the downloaded file in your preferred IDE or import the project into your IDE.
   3. Go to the GameRunner.Java file in the __ie.gmit.sw.ai.maze__ package.
   4. Run the project as a Java Application from this class.
+  
+### Features
 
 ### AI Search Algorithms
 The AI Search Algorithms are used to make the characters traverse the maze, there are various algorithms to do this. We first assigned the Brute Force Algorithm to the Spartan and manually set a goal node for him to reach. This was to ensure that we could successfully traverse the maze. Once we had this working we applied it to the Sprites. We used an Executor Service to thread the Sprites, allowing multiple Sprites to search for the goal node at the same time. We assigned different algorithms to different Sprites.

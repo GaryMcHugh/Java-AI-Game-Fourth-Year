@@ -1,4 +1,4 @@
-# Theory-of-Algorithms-Project
+# Artificial Intelligence
 
 **Student Name:** Christy Madden <br />
 **Student ID:** G00214065 <br />
